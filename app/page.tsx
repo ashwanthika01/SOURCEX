@@ -9,18 +9,42 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="min-h-screen bg-white text-gray-900 overflow-hidden">
+      
+      {/* Navbar stays same */}
       <Navbar />
-      <div className="flex-1">
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 space-y-24">
-          <Hero />
+
+      {/* 🔥 FULL WIDTH HERO */}
+      <Hero />
+
+      {/* ✨ Rest of the sections */}
+      <div className="relative z-10">
+        
+        {/* Light background sections */}
+        <section className="max-w-7xl mx-auto px-6 py-24 space-y-32">
           <Services />
           <Products />
           <About />
-          <MotionSection />
-          <CTA />
         </section>
+
+        {/* 💎 Premium separator (like Exportarts feel) */}
+        <div className="w-full h-40 bg-gradient-to-b from-white to-blue-50" />
+
+        {/* Motion section (can be more visual) */}
+        <section className="max-w-7xl mx-auto px-6 py-24">
+          <MotionSection />
+        </section>
+
+        {/* CTA - make it stand out */}
+        <section className="px-6 py-24 bg-gradient-to-br from-blue-50 via-white to-blue-100">
+          <div className="max-w-5xl mx-auto">
+            <CTA />
+          </div>
+        </section>
+
       </div>
+
+      {/* Footer */}
       <Footer />
     </main>
   );

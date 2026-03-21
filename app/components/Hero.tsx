@@ -1,85 +1,82 @@
 export default function Hero() {
   return (
-    <section id="top" className="grid gap-10 lg:grid-cols-[3fr,2fr] items-center">
-      <div className="space-y-6">
-        <span className="inline-flex items-center rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
-          Electronic Component Sourcing · BOM Fulfillment
-        </span>
+    <section id="top" className="relative h-screen w-full overflow-hidden flex items-center">
 
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
-          Reliable components for{" "}
-          <span className="text-emerald-400">global production lines.</span>
-        </h1>
+      {/* 🎥 Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
 
-        <p className="text-sm sm:text-base text-slate-300 max-w-xl">
-          SourceX Technologies helps hardware teams source, qualify and deliver
-          electronic components on time – from prototypes to mass production.
-        </p>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/40" />
 
-        <div className="flex flex-wrap items-center gap-3">
-          <a
-            href="#contact"
-            className="rounded-full bg-emerald-500 px-5 py-2.5 text-xs sm:text-sm font-medium text-slate-950 hover:bg-emerald-400 transition-colors"
-          >
-            Start a project
-          </a>
-          <a
-            href="#services"
-            className="rounded-full border border-slate-700 px-5 py-2.5 text-xs sm:text-sm font-medium text-slate-200 hover:border-emerald-400 hover:text-emerald-300 transition-colors"
-          >
-            View services
-          </a>
-        </div>
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
+        
+        <div className="max-w-2xl space-y-6">
+          
+          {/* ✅ Tag (fixed) */}
+          <span className="inline-flex items-center rounded-full bg-white/15 backdrop-blur px-5 py-1.5 text-[13px] font-medium text-white/95">
+            Electronic Component Sourcing · BOM Fulfillment
+          </span>
 
-        <div className="flex flex-wrap gap-6 text-xs text-slate-400">
-          <div>
-            <div className="font-semibold text-slate-100">48h</div>
-            <div>Average quote time</div>
-          </div>
-          <div>
-            <div className="font-semibold text-slate-100">+20</div>
-            <div>Global supplier networks</div>
-          </div>
-          <div>
-            <div className="font-semibold text-slate-100">0%</div>
-            <div>Counterfeit tolerance</div>
-          </div>
-        </div>
-      </div>
+          {/* Heading */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight drop-shadow-[0_2px_20px_rgba(0,0,0,0.6)]">
+            Reliable components for{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-sky-300 bg-clip-text text-transparent">
+              global production lines
+            </span>
+          </h1>
 
-      <div className="relative">
-        <div className="absolute -inset-8 rounded-3xl bg-emerald-500/10 blur-3xl" />
-        <div className="relative rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-6 space-y-4">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span>BOM Fulfillment Overview</span>
-            <span>Live</span>
-          </div>
-          <div className="grid grid-cols-3 gap-3 text-xs">
-            <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-3">
-              <div className="text-slate-400">On‑time delivery</div>
-              <div className="mt-1 text-lg font-semibold text-emerald-400">
-                97%
-              </div>
-            </div>
-            <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-3">
-              <div className="text-slate-400">Cost savings</div>
-              <div className="mt-1 text-lg font-semibold text-emerald-400">
-                18%
-              </div>
-            </div>
-            <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-3">
-              <div className="text-slate-400">Projects</div>
-              <div className="mt-1 text-lg font-semibold text-emerald-400">
-                120+
-              </div>
-            </div>
-          </div>
-          <p className="text-xs text-slate-400">
-            We coordinate sourcing, verification and logistics so your team can
-            focus on design and manufacturing.
+          {/* ✅ Description (brighter) */}
+          <p className="text-white/90 text-base sm:text-lg max-w-xl">
+            SourceX Technologies helps hardware teams source and deliver
+            electronic components — from prototype to production.
           </p>
+
+          {/* CTA */}
+          <div className="flex gap-6 pt-2 items-center">
+            
+            <a
+              href="#contact"
+              className="rounded-full bg-blue-500 px-6 py-3 text-sm font-medium text-white hover:bg-blue-400 transition shadow-lg shadow-blue-500/30"
+            >
+              Start a project
+            </a>
+
+            {/* ✅ View services (fixed) */}
+            <a
+              href="#services"
+              className="text-white text-sm font-medium hover:text-blue-300 transition"
+            >
+              View services →
+            </a>
+
+          </div>
+
         </div>
       </div>
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
+  <a href="#services" className="group">
+    <div className="animate-bounce">
+      <svg
+        className="w-12 h-12 text-white/90 group-hover:text-white transition"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3.5"
+        viewBox="0 0 24 24"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+  </a>
+</div>
     </section>
   );
 }
