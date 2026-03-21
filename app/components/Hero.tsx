@@ -1,48 +1,85 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { JSX } from "react";
-
-export default function Hero(): JSX.Element {
+export default function Hero() {
   return (
-    <section className="h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
+    <section id="top" className="grid gap-10 lg:grid-cols-[3fr,2fr] items-center">
+      <div className="space-y-6">
+        <span className="inline-flex items-center rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
+          Electronic Component Sourcing · BOM Fulfillment
+        </span>
 
-      {/* Glow Background */}
-      <div className="absolute w-[400px] h-[400px] bg-purple-600 blur-3xl opacity-30 rounded-full"></div>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight">
+          Reliable components for{" "}
+          <span className="text-emerald-400">global production lines.</span>
+        </h1>
 
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-4xl md:text-6xl font-bold leading-tight"
-      >
-        End-to-End BOM Fulfillment
-      </motion.h1>
+        <p className="text-sm sm:text-base text-slate-300 max-w-xl">
+          SourceX Technologies helps hardware teams source, qualify and deliver
+          electronic components on time – from prototypes to mass production.
+        </p>
 
-      <motion.p
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="mt-6 text-gray-400 max-w-xl"
-      >
-        Premium electronic components sourcing with speed, reliability,
-        and global supplier access.
-      </motion.p>
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href="#contact"
+            className="rounded-full bg-emerald-500 px-5 py-2.5 text-xs sm:text-sm font-medium text-slate-950 hover:bg-emerald-400 transition-colors"
+          >
+            Start a project
+          </a>
+          <a
+            href="#services"
+            className="rounded-full border border-slate-700 px-5 py-2.5 text-xs sm:text-sm font-medium text-slate-200 hover:border-emerald-400 hover:text-emerald-300 transition-colors"
+          >
+            View services
+          </a>
+        </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="mt-8 flex gap-4"
-      >
-        <button className="px-6 py-3 bg-purple-600 rounded-lg hover:bg-purple-700 transition">
-          Get Quote
-        </button>
+        <div className="flex flex-wrap gap-6 text-xs text-slate-400">
+          <div>
+            <div className="font-semibold text-slate-100">48h</div>
+            <div>Average quote time</div>
+          </div>
+          <div>
+            <div className="font-semibold text-slate-100">+20</div>
+            <div>Global supplier networks</div>
+          </div>
+          <div>
+            <div className="font-semibold text-slate-100">0%</div>
+            <div>Counterfeit tolerance</div>
+          </div>
+        </div>
+      </div>
 
-        <button className="px-6 py-3 border border-gray-500 rounded-lg hover:bg-gray-800 transition">
-          Contact Us
-        </button>
-      </motion.div>
+      <div className="relative">
+        <div className="absolute -inset-8 rounded-3xl bg-emerald-500/10 blur-3xl" />
+        <div className="relative rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900/80 to-slate-950/80 p-6 space-y-4">
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <span>BOM Fulfillment Overview</span>
+            <span>Live</span>
+          </div>
+          <div className="grid grid-cols-3 gap-3 text-xs">
+            <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-3">
+              <div className="text-slate-400">On‑time delivery</div>
+              <div className="mt-1 text-lg font-semibold text-emerald-400">
+                97%
+              </div>
+            </div>
+            <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-3">
+              <div className="text-slate-400">Cost savings</div>
+              <div className="mt-1 text-lg font-semibold text-emerald-400">
+                18%
+              </div>
+            </div>
+            <div className="rounded-2xl bg-slate-900/80 border border-slate-800 p-3">
+              <div className="text-slate-400">Projects</div>
+              <div className="mt-1 text-lg font-semibold text-emerald-400">
+                120+
+              </div>
+            </div>
+          </div>
+          <p className="text-xs text-slate-400">
+            We coordinate sourcing, verification and logistics so your team can
+            focus on design and manufacturing.
+          </p>
+        </div>
+      </div>
     </section>
   );
 }
