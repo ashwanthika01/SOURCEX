@@ -124,7 +124,7 @@ export default function About() {
         </motion.div>
 
         <div className="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide">
-          {/* ====================== ACTIVE COMPONENTS – REAL IMAGES ====================== */}
+          {/* ACTIVE COMPONENTS (unchanged) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -143,6 +143,15 @@ export default function About() {
                 { name: "National", file: "national.jpg" },
                 { name: "power", file: "power.jpg" },
                 { name: "taiwan", file: "taiwan.jpg" },
+                { name: "nexperia", file: "nexperia.jpg" },
+                { name: "nuvuton", file: "nuvuton.jpg" },
+                { name: "semihow", file: "semihow.jpg" },
+                { name: "semikron", file: "semikron.jpg" },
+                { name: "semtech", file: "semtech.jpg" },
+                { name: "silicon", file: "silicon.jpg" },
+                { name: "st", file: "st.jpg" },
+                { name: "toshiba", file: "toshiba.jpg" },
+                { name: "samsung", file: "samsung.jpg" },
               ].map((brand) => (
                 <motion.div
                   key={brand.name}
@@ -161,8 +170,7 @@ export default function About() {
             <p className="text-center text-xs text-gray-500 mt-8">+ 30 more brands</p>
           </motion.div>
 
-          {/* BOX 2, 3, 4 (unchanged – ready for you to add images later) */}
-          {/* BOX 2: PASSIVE COMPONENTS */}
+          {/* PASSIVE COMPONENTS (unchanged) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -173,19 +181,39 @@ export default function About() {
           >
             <h4 className="text-2xl font-bold text-center text-sky-700 mb-8">Passive Components</h4>
             <div className="grid grid-cols-4 gap-6">
-              {["Bourns", "Kemet", "Yageo", "TDK", "EPCOS", "Watts", "HKR", "SAMWHA", "Diotec", "CDIL", "HEL", "Royalohm", "Vishay", "Jwco"].map((brand, i) => (
+              {[
+                { name: "Bourns", file: "bourns.jpg" },
+                { name: "Kemet", file: "kemet.jpg" },
+                { name: "Yageo", file: "yageo.jpg" },
+                { name: "TDK", file: "tdk.jpg" },
+                { name: "EPCOS", file: "epcos.jpg" },
+                { name: "Watts", file: "watts.jpg" },
+                { name: "HKR", file: "hkr.jpg" },
+                { name: "SAMWHA", file: "samwha.jpg" },
+                { name: "Diotec", file: "diotec.jpg" },
+                { name: "CDIL", file: "cdil.jpg" },
+                { name: "HEL", file: "hel.jpg" },
+                { name: "Royalohm", file: "royalohm.jpg" },
+                { name: "Vishay", file: "vishay.jpg" },
+                { name: "Jwco", file: "jwco.jpg" },
+              ].map((brand) => (
                 <motion.div
-                  key={i}
+                  key={brand.name}
                   whileHover={{ scale: 1.12, y: -4 }}
-                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-[10px] font-medium text-gray-700 hover:shadow-md"
+                  transition={{ duration: 0.2 }}
+                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center overflow-hidden"
                 >
-                  {brand}
+                  <img
+                    src={`/${brand.file}`}
+                    alt={brand.name}
+                    className="h-10 w-auto max-w-full object-contain"
+                  />
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* BOX 3: MODULES */}
+          {/* MODULES (unchanged) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -196,19 +224,34 @@ export default function About() {
           >
             <h4 className="text-2xl font-bold text-center text-sky-700 mb-8">Modules</h4>
             <div className="grid grid-cols-4 gap-6">
-              {["ESPRESSIF", "Raspberry Pi", "Arduino", "Littelfuse", "Ai-Thinker", "SIMCom", "KDS", "YXC", "X M&E"].map((brand, i) => (
+              {[
+                { name: "KDS", file: "kds.jpg" },
+                { name: "YXC", file: "yxc.jpg" },
+                { name: "Littelfuse", file: "littelfuse.jpg" },
+                { name: "X2", file: "x2.jpg" },
+                { name: "ESPRESSIF", file: "espressif.jpg" },
+                { name: "RaspberryPi", file: "raspberrypi.jpg" },
+                { name: "Ai-Thinker", file: "aithinker.jpg" },
+                { name: "SIMCom", file: "simcom.jpg" },
+                { name: "Arduino", file: "arduino.jpg" },
+              ].map((brand) => (
                 <motion.div
-                  key={i}
+                  key={brand.name}
                   whileHover={{ scale: 1.12, y: -4 }}
-                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-[10px] font-medium text-gray-700 hover:shadow-md"
+                  transition={{ duration: 0.2 }}
+                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center overflow-hidden"
                 >
-                  {brand}
+                  <img
+                    src={`/${brand.file}`}
+                    alt={brand.name}
+                    className="h-10 w-auto max-w-full object-contain"
+                  />
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* BOX 4: CABLE WIRES, POWER CORDS & ACCESSORIES */}
+          {/* ====================== CABLE WIRES, POWER CORDS & ACCESSORIES – NOW WITH REAL IMAGES ====================== */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -219,13 +262,33 @@ export default function About() {
           >
             <h4 className="text-2xl font-bold text-center text-sky-700 mb-8">Cable Wires, Power Cords & Accessories</h4>
             <div className="grid grid-cols-4 gap-6">
-              {["Burndy", "CommScope", "Belden", "AlphaWire", "Corning", "General Cable", "Lapp Group", "Heyco", "HellermannTyton", "Gardner Bender", "Lake Cable", "Kalas", "Ideal", "Harbour"].map((brand, i) => (
+              {[
+                { name: "Burndy", file: "burndy.jpg" },
+                { name: "CommScope", file: "commscope.jpg" },
+                { name: "Belden", file: "belden.jpg" },
+                { name: "AlphaWire", file: "alphawire.jpg" },
+                { name: "Corning", file: "corning.jpg" },
+                { name: "General Cable", file: "generalcable.jpg" },
+                { name: "Lapp Group", file: "lappgroup.jpg" },
+                { name: "Heyco", file: "heyco.jpg" },
+                { name: "HellermanTyton", file: "hellermantyton.jpg" },
+                { name: "Gardner Bender", file: "gardnerbender.jpg" },
+                { name: "Lake Cable", file: "lakecable.jpg" },
+                { name: "Kalas", file: "kalas.jpg" },
+                { name: "Ideal", file: "ideal.jpg" },
+                { name: "Harbour", file: "harbour.jpg" },
+              ].map((brand) => (
                 <motion.div
-                  key={i}
+                  key={brand.name}
                   whileHover={{ scale: 1.12, y: -4 }}
-                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center text-[10px] font-medium text-gray-700 hover:shadow-md"
+                  transition={{ duration: 0.2 }}
+                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center overflow-hidden"
                 >
-                  {brand}
+                  <img
+                    src={`/${brand.file}`}
+                    alt={brand.name}
+                    className="h-10 w-auto max-w-full object-contain"
+                  />
                 </motion.div>
               ))}
             </div>
