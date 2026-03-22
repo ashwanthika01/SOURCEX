@@ -7,15 +7,15 @@ export default function CTA() {
     <section
       id="contact"
       className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] 
-      bg-gradient-to-br from-[#7dd3fc] via-[#60a5fa] to-[#3b82f6] 
-      py-28 px-6 md:px-20 overflow-hidden"
+        bg-gradient-to-br from-[#7dd3fc] via-[#60a5fa] to-[#3b82f6] 
+        py-20 px-6 md:px-20 overflow-hidden"
     >
       {/* SUBTLE TEXTURE */}
       <div className="absolute inset-0 opacity-30 
         bg-[radial-gradient(circle_at_20%_30%,white,transparent_40%),radial-gradient(circle_at_80%_70%,white,transparent_40%)]" 
       />
 
-      {/* CONTENT (NO HARD CONTAINER LOOK) */}
+      {/* CONTENT */}
       <div className="relative w-full max-w-5xl mx-auto text-center text-white">
         
         {/* HEADING */}
@@ -32,18 +32,18 @@ export default function CTA() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
-          className="mt-4 text-blue-100 max-w-2xl mx-auto"
+          className="mt-3 text-blue-100 max-w-2xl mx-auto"
         >
           Send us your BOM or a quick project overview — our team will get
           back to you within 48 hours with clear next steps.
         </motion.p>
 
-        {/* FORM */}
+        {/* FORM - tighter spacing */}
         <motion.form
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.7 }}
-          className="mt-12 space-y-4 text-left"
+          className="mt-8 space-y-3 text-left"
         >
           <div className="grid gap-4 sm:grid-cols-2">
             <input
@@ -78,12 +78,12 @@ export default function CTA() {
           </button>
         </motion.form>
 
-        {/* ARROW (SAFE POSITION) */}
+        {/* ARROW */}
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="absolute left-10 bottom-40 hidden md:block"
+          className="absolute left-10 bottom-28 hidden md:block"
         >
           <svg width="160" height="100" viewBox="0 0 200 120" fill="none">
             <path
@@ -102,8 +102,8 @@ export default function CTA() {
           </svg>
         </motion.div>
 
-        {/* CONTACT */}
-        <div className="mt-10 text-sm text-blue-100">
+        {/* CONTACT INFO - even tighter */}
+        <div className="mt-6 text-sm text-blue-100">
           <p className="font-medium text-white">SourceX Technologies</p>
           <p className="text-xs text-blue-200">
             info@sourcex-tech.com
@@ -111,8 +111,8 @@ export default function CTA() {
         </div>
       </div>
 
-      {/* 🔻 GRADIENT EXTENSION INTO FOOTER */}
-      <div className="absolute bottom-0 left-0 w-full h-40 
+      {/* GRADIENT EXTENSION */}
+      <div className="absolute bottom-0 left-0 w-full h-28 
         bg-gradient-to-b from-transparent to-[#1e3a8a]" 
       />
     </section>
