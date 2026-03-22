@@ -108,7 +108,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* PRODUCT OFFERINGS */}
+        {/* PRODUCT OFFERINGS TITLE */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -123,8 +123,9 @@ export default function About() {
           </p>
         </motion.div>
 
+        {/* HORIZONTAL SCROLL CONTAINER */}
         <div className="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide">
-          {/* ACTIVE COMPONENTS (unchanged) */}
+          {/* BOX 1: ACTIVE COMPONENTS */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -170,7 +171,98 @@ export default function About() {
             <p className="text-center text-xs text-gray-500 mt-8">+ 30 more brands</p>
           </motion.div>
 
-          {/* PASSIVE COMPONENTS (unchanged) */}
+          {/* BOX 2: MORE ACTIVE COMPONENTS */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ y: { repeat: Infinity, duration: 4.0, ease: "easeInOut" } }}
+            whileHover={{ scale: 1.02, y: -15 }}
+            className="min-w-[380px] bg-white rounded-3xl shadow-2xl border border-gray-200 p-8 snap-center group"
+          >
+            <h4 className="text-2xl font-bold text-center text-sky-700 mb-8">More Active Components</h4>
+            <div className="grid grid-cols-4 gap-6">
+              {[
+                { name: "Microsemi", file: "microsemi.jpg" },
+                { name: "Atmel", file: "atmel.jpg" },
+                { name: "Dallas", file: "dallas.jpg" },
+                { name: "Epson", file: "epson.jpg" },
+                { name: "Cypress", file: "cypress.jpg" },
+                { name: "Actel", file: "actel.jpg" },
+                { name: "Allegro", file: "allegro.jpg" },
+                { name: "Mitsubishi", file: "mitsubishi.jpg" },
+                { name: "AMS", file: "ams.jpg" },
+                { name: "Analog", file: "analog.jpg" },
+                { name: "Cirrus", file: "cirrus.jpg" },
+                { name: "Everlight", file: "everlight.jpg" },
+                { name: "Fairchild", file: "fairchild.jpg" },
+                { name: "Fuji Electric", file: "fuji.jpg" },
+                { name: "GigaDevice", file: "gigadevice.jpg" },
+                { name: "Intersil", file: "intersil.jpg" },
+              ].map((brand) => (
+                <motion.div
+                  key={brand.name}
+                  whileHover={{ scale: 1.12, y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src={`/${brand.file}`}
+                    alt={brand.name}
+                    className="h-10 w-auto max-w-full object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
+            <p className="text-center text-xs text-gray-500 mt-8">+ many more brands</p>
+          </motion.div>
+
+          {/* BOX 3: ADDITIONAL ACTIVE COMPONENTS */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ y: [0, -10, 0] }}
+            transition={{ y: { repeat: Infinity, duration: 4.1, ease: "easeInOut" } }}
+            whileHover={{ scale: 1.02, y: -15 }}
+            className="min-w-[380px] bg-white rounded-3xl shadow-2xl border border-gray-200 p-8 snap-center group"
+          >
+            <h4 className="text-2xl font-bold text-center text-sky-700 mb-8">Additional Active Components</h4>
+            <div className="grid grid-cols-4 gap-6">
+              {[
+                { name: "htc", file: "htc.jpg" },
+                { name: "ik", file: "ik.jpg" },
+                { name: "inter", file: "inter.jpg" },
+                { name: "ch", file: "ch.jpg" },
+                { name: "Infineon", file: "infineon.jpg" },
+                
+                { name: "UTC", file: "utc.jpg" },
+                { name: "Sharp", file: "sharp.jpg" },
+               
+                { name: "JHD", file: "jhd.jpg" },
+                { name: "microchip", file: "microchip.jpg" },
+                { name: "vishay", file: "vishay.jpg" },
+                
+                { name: "win", file: "win.jpg" },
+                { name: "wxdh", file: "wxdh.jpg" },
+              ].map((brand) => (
+                <motion.div
+                  key={brand.name}
+                  whileHover={{ scale: 1.12, y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-14 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src={`/${brand.file}`}
+                    alt={brand.name}
+                    className="h-10 w-auto max-w-full object-contain"
+                  />
+                </motion.div>
+              ))}
+            </div>
+            <p className="text-center text-xs text-gray-500 mt-8">+ even more brands</p>
+          </motion.div>
+
+          {/* PASSIVE COMPONENTS */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -213,7 +305,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* MODULES (unchanged) */}
+          {/* MODULES */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -251,7 +343,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* ====================== CABLE WIRES, POWER CORDS & ACCESSORIES – NOW WITH REAL IMAGES ====================== */}
+          {/* CABLE WIRES, POWER CORDS & ACCESSORIES */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
