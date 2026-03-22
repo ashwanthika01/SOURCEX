@@ -1,19 +1,24 @@
 export default function Footer() {
   return (
-    <footer className="relative mt-20 border-t border-gray-200 bg-gradient-to-b from-white to-blue-50">
+    <footer className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden">
       
-      {/* Glow accents */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-200/30 blur-3xl rounded-full" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-sky-200/30 blur-3xl rounded-full" />
+      {/*  SAME GRADIENT AS CTA */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#7dd3fc] via-[#60a5fa] to-[#3b82f6]" />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-12 grid gap-10 md:grid-cols-3">
+      {/* SUBTLE TEXTURE */}
+      <div className="absolute inset-0 opacity-20 
+        bg-[radial-gradient(circle_at_20%_30%,white,transparent_40%),radial-gradient(circle_at_80%_70%,white,transparent_40%)]" 
+      />
+
+      {/* CONTENT */}
+      <div className="relative max-w-7xl mx-auto px-6 py-16 grid gap-10 md:grid-cols-3 text-white">
         
         {/* 🏢 Brand */}
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold">
             SourceX Technologies
           </h3>
-          <p className="text-sm text-gray-600 max-w-xs">
+          <p className="text-sm text-blue-100 max-w-xs">
             Global electronic component sourcing partner helping hardware teams
             scale from prototype to production.
           </p>
@@ -21,18 +26,18 @@ export default function Footer() {
 
         {/* 🔗 Links */}
         <div className="space-y-3">
-          <h4 className="text-sm font-medium text-gray-900">Quick Links</h4>
-          <div className="flex flex-col gap-2 text-sm text-gray-600">
-            <a href="#top" className="hover:text-blue-600 transition">
+          <h4 className="text-sm font-medium text-white">Quick Links</h4>
+          <div className="flex flex-col gap-2 text-sm text-blue-100">
+            <a href="#top" className="hover:text-white transition">
               Home
             </a>
-            <a href="#services" className="hover:text-blue-600 transition">
+            <a href="#services" className="hover:text-white transition">
               Services
             </a>
-            <a href="#about" className="hover:text-blue-600 transition">
+            <a href="#about" className="hover:text-white transition">
               About
             </a>
-            <a href="#contact" className="hover:text-blue-600 transition">
+            <a href="#contact" className="hover:text-white transition">
               Contact
             </a>
           </div>
@@ -40,33 +45,33 @@ export default function Footer() {
 
         {/* 📞 Contact */}
         <div className="space-y-3">
-          <h4 className="text-sm font-medium text-gray-900">Contact</h4>
-          <div className="text-sm text-gray-600 space-y-1">
-            <p>info@sourcex-tech.com</p>
-            <p>+91-00000-00000</p>
-            <p className="text-xs text-gray-400 pt-2">
-              Chennai, India · Global operations
+          <h4 className="text-sm font-medium text-white">Contact</h4>
+          <div className="text-sm text-blue-100 space-y-1">
+            <p>sourcex25@gmail.com</p>
+            <p className="text-xs text-blue-200 pt-2">
+              Plot No. 6, Ground floor, Kamaraj Nagar, Sipcot 1, Zuzuvadi post
+              Hosur - 635126, Tamil Nadu
             </p>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 gap-2">
+      {/* BOTTOM BAR */}
+      <div className="relative border-t border-white/20">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between text-xs text-blue-100 gap-2">
           
           <div>
             © {new Date().getFullYear()} SourceX Technologies. All rights reserved.
           </div>
 
           <div className="flex gap-4">
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href="#" className="hover:text-white transition">
               Privacy
             </a>
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href="#" className="hover:text-white transition">
               Terms
             </a>
-            <a href="#top" className="hover:text-blue-600 transition">
+            <a href="#top" className="hover:text-white transition">
               Back to top ↑
             </a>
           </div>
