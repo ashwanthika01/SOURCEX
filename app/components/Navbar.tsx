@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -52,13 +53,24 @@ export default function Navbar() {
             </>
           )}
 
-          {/* LOGO */}
-          <div
-            className={`text-lg font-semibold tracking-tight transition  ${
-              active ? "text-black" : "text-white"
-            }`}
-          >
-            SourceX
+          {/* LOGO SECTION - Updated with Image */}
+          <div className="flex items-center gap-3">
+            <div className="relative w-9 h-9 md:w-10 md:h-10 flex-shrink-0">
+              <Image
+                src="/SourceX.jpeg"         
+                alt="SourceX Technologies"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+            <div
+              className={`text-xl font-semibold tracking-tight transition-colors ${
+                active ? "text-gray-900" : "text-white"
+              }`}
+            >
+              SourceX
+            </div>
           </div>
 
           {/* DESKTOP MENU */}
@@ -69,7 +81,7 @@ export default function Navbar() {
                 href={link.href}
                 className={`transition ${
                   active
-                    ? "text-black hover:text-blue-600"
+                    ? "text-gray-700 hover:text-blue-600"
                     : "text-white/90 hover:text-white"
                 }`}
               >
@@ -77,32 +89,32 @@ export default function Navbar() {
               </a>
             ))}
 
-            {/* CTA */}
+            {/* CTA Button */}
             <a
-              href="#contact"
-              className={`ml-4 rounded-full px-5 py-2 text-xs font-medium transition ${
+              href="#inquiry-form"          // Changed to point to your form
+              className={`ml-4 rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
                 active
-                  ? "bg-blue-600 text-white hover:bg-blue-500 shadow-md"
-                  : "bg-white/10 text-white hover:bg-white/20"
+                  ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
+                  : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm"
               }`}
             >
-              Book a call
+              Get a Quote
             </a>
           </div>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE HAMBURGER */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden flex flex-col gap-1"
+            className="md:hidden flex flex-col gap-1.5"
           >
             <span
-              className={`w-5 h-0.5 transition ${
-                active ? "bg-black" : "bg-white"
+              className={`w-6 h-0.5 transition-all ${
+                active ? "bg-gray-900" : "bg-white"
               }`}
             />
             <span
-              className={`w-5 h-0.5 transition ${
-                active ? "bg-black" : "bg-white"
+              className={`w-6 h-0.5 transition-all ${
+                active ? "bg-gray-900" : "bg-white"
               }`}
             />
           </button>
@@ -124,18 +136,18 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-black hover:text-blue-600 transition"
+              className="text-gray-800 hover:text-blue-600 py-1 transition"
             >
               {link.label}
             </a>
           ))}
 
           <a
-            href="#contact"
+            href="#inquiry-form"
             onClick={() => setOpen(false)}
-            className="mt-2 rounded-full bg-blue-600 px-4 py-2 text-xs text-white text-center"
+            className="mt-4 rounded-full bg-blue-600 px-6 py-3 text-white text-center font-medium"
           >
-            Book a call
+            Get a Quote
           </a>
         </div>
       </motion.div>

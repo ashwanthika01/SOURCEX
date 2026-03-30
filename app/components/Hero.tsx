@@ -44,7 +44,7 @@ export default function Hero() {
           <div className="flex gap-6 pt-2 items-center">
             
             <a
-              href="#contact"
+              href="#inquiry-form"
               className="rounded-full bg-blue-500 px-6 py-3 text-sm font-medium text-white hover:bg-blue-400 transition shadow-lg shadow-blue-500/30"
             >
               Start a project
@@ -63,7 +63,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10">
-  <a href="#services" className="group">
+  <a href="#next" className="group">
     <div className="animate-bounce">
       <svg
         className="w-12 h-12 text-white/90 group-hover:text-white transition"

@@ -61,7 +61,7 @@ const itemVariants = {
     transition: {
       delay: i * 0.2,
       duration: 1,
-      ease: [0.22, 1, 0.36, 1], // premium easing
+      ease: "easeInOut" as const,
     },
   }),
 };
@@ -71,7 +71,9 @@ const itemVariants = {
 //////////////////////////////////////////////////////////
 export default function Services() {
   return (
-    <section className="relative min-h-screen bg-[#f7f9fc] flex items-center px-8 py-24 overflow-hidden">
+    <section
+     id = "next"
+     className="relative min-h-screen bg-[#f7f9fc] flex items-center px-8 py-24 overflow-hidden">
       
       {/* 🌟 BACKGROUND GLOW */}
       <div className="absolute inset-0 pointer-events-none">
@@ -91,7 +93,7 @@ export default function Services() {
 //////////////////////////////////////////////////////////
 // CARD (MAGNETIC + SPOTLIGHT)
 //////////////////////////////////////////////////////////
-function ServiceCard({ service, index }) {
+function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -101,7 +103,7 @@ function ServiceCard({ service, index }) {
   const rotateX = useTransform(springY, [-100, 100], [10, -10]);
   const rotateY = useTransform(springX, [-100, 100], [-10, 10]);
 
-  function handleMouseMove(e) {
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left - rect.width / 2);
     mouseY.set(e.clientY - rect.top - rect.height / 2);
