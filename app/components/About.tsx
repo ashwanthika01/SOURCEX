@@ -268,7 +268,7 @@ export default function About() {
                   </motion.div>
                 ))}
               </div>
-              <p className="text-center text-xs text-gray-500 mt-8">+ 30 more brands</p>
+              
             </motion.div>
 
             {/* More Active Components - Box 2 */}
@@ -314,7 +314,6 @@ export default function About() {
                   </motion.div>
                 ))}
               </div>
-              <p className="text-center text-xs text-gray-500 mt-8">+ many more brands</p>
             </motion.div>
 
             {/* Additional Active Components - Box 3 */}
@@ -356,7 +355,6 @@ export default function About() {
                   </motion.div>
                 ))}
               </div>
-              <p className="text-center text-xs text-gray-500 mt-8">+ even more brands</p>
             </motion.div>
 
             {/* Passive Components */}

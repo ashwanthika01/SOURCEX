@@ -57,7 +57,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <div className="relative w-9 h-9 md:w-10 md:h-10 flex-shrink-0">
               <Image
-                src="/SourceX.jpeg"         
+                src="/SourceX.png"       
                 alt="SourceX Technologies"
                 fill
                 className="object-contain"
