@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link"; // Link from next.js
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Products", href: "#products" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/nservices" },
+  { label: "Products", href: "/products" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -16,7 +17,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  // Scroll detection
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -29,8 +29,8 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 🌟 NAVBAR WRAPPER */}
-      <header
+      {/* NAVBAR WRAPPER */}
+      <motion.div
         className="fixed top-4 left-0 w-full z-50 flex justify-center px-4"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -45,29 +45,19 @@ export default function Navbar() {
               : "bg-transparent border border-transparent"
           }`}
         >
-          {/* ✨ Gradient Blur Edges */}
-          {active && (
-            <>
-              <div className="absolute -left-20 top-0 h-full w-40 bg-gradient-to-r from-white to-transparent blur-2xl pointer-events-none" />
-              <div className="absolute -right-20 top-0 h-full w-40 bg-gradient-to-l from-white to-transparent blur-2xl pointer-events-none" />
-            </>
-          )}
-
-          {/* LOGO SECTION (FIXED) */}
+          {/* LOGO */}
           <div className="flex items-center gap-2">
-            {/* Logo Icon */}
             <div className="relative w-14 h-9 flex items-center justify-center">
               <Image
                 src="/Logo.png"
                 alt="SourceX Technologies"
                 fill
-                sizes = "56px"
+                sizes="56px"
                 className="object-contain scale-130 translate-y-[2px]"
                 priority
               />
             </div>
 
-            {/* Logo Text */}
             <div
               className={`text-xl font-semibold tracking-tight leading-none transition-colors ${
                 active ? "text-gray-900" : "text-white"
@@ -80,7 +70,7 @@ export default function Navbar() {
           {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center gap-8 text-sm">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className={`transition ${
@@ -90,12 +80,12 @@ export default function Navbar() {
                 }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
 
             {/* CTA Button */}
-            <a
-              href="#inquiry-form"
+            <Link
+              href="/inquiry-form"
               className={`ml-4 rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
                 active
                   ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
@@ -103,7 +93,7 @@ export default function Navbar() {
               }`}
             >
               Get a Quote
-            </a>
+            </Link>
           </div>
 
           {/* MOBILE HAMBURGER */}
@@ -123,9 +113,9 @@ export default function Navbar() {
             />
           </button>
         </motion.nav>
-      </header>
+      </motion.div>
 
-      {/* 📱 MOBILE MENU */}
+      {/* MOBILE MENU */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
@@ -136,23 +126,23 @@ export default function Navbar() {
       >
         <div className="bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-xl p-6 flex flex-col gap-4 text-sm">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
-              onClick={() => setOpen(false)}
               className="text-gray-800 hover:text-blue-600 py-1 transition"
+              onClick={() => setOpen(false)}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
 
-          <a
-            href="#inquiry-form"
-            onClick={() => setOpen(false)}
+          <Link
+            href="/inquiry-form"
             className="mt-4 rounded-full bg-blue-600 px-6 py-3 text-white text-center font-medium"
+            onClick={() => setOpen(false)}
           >
             Get a Quote
-          </a>
+          </Link>
         </div>
       </motion.div>
     </>
