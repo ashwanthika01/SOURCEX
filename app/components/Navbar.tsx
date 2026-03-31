@@ -56,12 +56,13 @@ export default function Navbar() {
           {/* LOGO SECTION (FIXED) */}
           <div className="flex items-center gap-2">
             {/* Logo Icon */}
-            <div className="relative w-15 h-9 flex items-center justify-center overflow-hidden">
+            <div className="relative w-14 h-9 flex items-center justify-center">
               <Image
                 src="/Logo.png"
                 alt="SourceX Technologies"
                 fill
-                className="object-contain scale-130 translate-y-[7px]"
+                sizes = "56px"
+                className="object-contain scale-130 translate-y-[2px]"
                 priority
               />
             </div>

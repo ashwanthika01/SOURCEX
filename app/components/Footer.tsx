@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function CTAFooter() {
   return (
@@ -137,48 +138,69 @@ export default function CTAFooter() {
               Your information is secure. We respect your inbox.
             </p>
           </form>
-        </motion.div>
-      </div>
+  </motion.div>
+</div>
 
-      {/* ================= FOOTER ================= */}
-      <div className="relative w-full mt-24 border-t border-white/20 pt-12">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-10 text-white">
-          
-          {/* Brand */}
-          <div className="md:col-span-5 flex flex-col items-center md:items-start">
-            <h3 className="font-semibold text-2xl tracking-tight">SourceX Technologies</h3>
-            <p className="mt-3 text-blue-100 text-[15px] max-w-md">
-              Your trusted global partner for electronic component sourcing, PCB assembly, 
-              and supply chain solutions. Helping hardware startups and manufacturers scale faster.
-            </p>
+{/* ================= FOOTER ================= */}
+ <footer className="w-full mt-24 border-t border-white/50 pt-12 pb-8">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 text-white">
+        
+        {/* LEFT: BRAND */}
+        <div className="md:col-span-5">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/Logo.png"
+              alt="SourceX Technologies"
+              width={100}
+              height={100}
+              className="object-contain"
+              priority
+            />
+            <h3 className="text-xl font-semibold tracking-tight text-white/90">
+              SourceX Technologies
+            </h3>
           </div>
 
-          {/* Quick Links */}
-          <div className="md:col-span-3 flex flex-col items-center md:items-start">
-            <h4 className="font-medium text-lg mb-4">Company</h4>
-            <div className="flex flex-col gap-2.5 text-blue-100 text-sm">
-              <a href="/about" className="hover:text-white transition-colors">About Us</a>
-              <a href="/services" className="hover:text-white transition-colors">Our Services</a>
-              <a href="/products" className="hover:text-white transition-colors">Products</a>
-              <a href="/contact" className="hover:text-white transition-colors">Contact</a>
-            </div>
+          <p className="mt-4 text-white/80 text-sm leading-relaxed max-w-md">
+            Your trusted global partner for electronic component sourcing, PCB assembly,
+            and supply chain solutions. Helping hardware startups and manufacturers scale faster.
+          </p>
+        </div>
+
+        {/* CENTER: LINKS */}
+        <div className="md:col-span-3">
+          <h4 className="text-white/80 font-medium mb-4">Company</h4>
+
+          <div className="flex flex-col gap-2 text-sm text-white/80">
+            <a href="/about" className="hover:text-white transition">About Us</a>
+            <a href="/services" className="hover:text-white transition">Our Services</a>
+            <a href="/products" className="hover:text-white transition">Products</a>
+            <a href="/contact" className="hover:text-white transition">Contact</a>
           </div>
+        </div>
 
-          {/* Contact */}
-          <div className="md:col-span-4 flex flex-col items-center md:items-end text-center md:text-right">
-            <h4 className="font-medium text-lg mb-4">Get in Touch</h4>
-            <a href="mailto:sourcex25@gmail.com" className="text-blue-100 hover:text-white transition text-sm block">
-              sourcex25@gmail.com
-            </a>
-            <p className="text-blue-200 text-sm mt-1">Hosur, Tamil Nadu, India</p>
+        {/* RIGHT: CONTACT */}
+        <div className="md:col-span-4 md:text-right">
+          <h4 className="text-white/80 font-medium mb-4">Get in Touch</h4>
 
-            <div className="mt-8 text-xs text-blue-200/80">
-              © {new Date().getFullYear()} SourceX Technologies Private Limited<br />
-              All Rights Reserved. • Privacy Policy • Terms of Service
-            </div>
+          <a
+            href="mailto:sourcex25@gmail.com"
+            className="block text-white/80 hover:text-white transition text-sm"
+          >
+            sourcex25@gmail.com
+          </a>
+
+          <p className="text-white/80 text-sm mt-2">
+            Hosur, Tamil Nadu, India
+          </p>
+
+          <div className="mt-8 text-xs text-white/80">
+            © {new Date().getFullYear()} SourceX Technologies Private Limited<br />
+            All Rights Reserved • Privacy Policy • Terms of Service
           </div>
         </div>
       </div>
-    </section>
+    </footer>
+  </section>
   );
 }
