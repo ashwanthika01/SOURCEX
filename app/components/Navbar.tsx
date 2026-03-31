@@ -53,19 +53,22 @@ export default function Navbar() {
             </>
           )}
 
-          {/* LOGO SECTION - Updated with Image */}
-          <div className="flex items-center gap-3">
-            <div className="relative w-9 h-9 md:w-10 md:h-10 flex-shrink-0">
+          {/* LOGO SECTION (FIXED) */}
+          <div className="flex items-center gap-2">
+            {/* Logo Icon */}
+            <div className="relative w-15 h-9 flex items-center justify-center overflow-hidden">
               <Image
-                src="/SourceX.png"       
+                src="/Logo.png"
                 alt="SourceX Technologies"
                 fill
-                className="object-contain"
+                className="object-contain scale-130 translate-y-[7px]"
                 priority
               />
             </div>
+
+            {/* Logo Text */}
             <div
-              className={`text-xl font-semibold tracking-tight transition-colors ${
+              className={`text-xl font-semibold tracking-tight leading-none transition-colors ${
                 active ? "text-gray-900" : "text-white"
               }`}
             >
@@ -91,7 +94,7 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <a
-              href="#inquiry-form"          // Changed to point to your form
+              href="#inquiry-form"
               className={`ml-4 rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
                 active
                   ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
