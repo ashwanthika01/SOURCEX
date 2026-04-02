@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link"; // Link from next.js
+import Link from "next/link";
 
 const navLinks = [
   { label: "Services", href: "/nservices" },
-  { label: "Products", href: "/products" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Products", href: "/nproducts" },
+  { label: "About", href: "/nabout" },
+  { label: "Contact", href: "/ncontact" },
 ];
 
 export default function Navbar() {
@@ -46,7 +46,7 @@ export default function Navbar() {
           }`}
         >
           {/* LOGO */}
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="relative w-14 h-9 flex items-center justify-center">
               <Image
                 src="/Logo.png"
@@ -65,7 +65,7 @@ export default function Navbar() {
             >
               SourceX
             </div>
-          </div>
+          </Link>
 
           {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center gap-8 text-sm">
@@ -85,7 +85,7 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <Link
-              href="/inquiry-form"
+              href="/nquote"
               className={`ml-4 rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
                 active
                   ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
@@ -137,7 +137,7 @@ export default function Navbar() {
           ))}
 
           <Link
-            href="/inquiry-form"
+            href="/nquote"
             className="mt-4 rounded-full bg-blue-600 px-6 py-3 text-white text-center font-medium"
             onClick={() => setOpen(false)}
           >
