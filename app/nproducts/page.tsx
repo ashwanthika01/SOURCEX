@@ -15,143 +15,149 @@ import Link from "next/link";
 const products = [
   {
     title: "Electronic Components",
-    description: "High-quality semiconductors, ICs, connectors, relays, and precision components for industrial and commercial applications.",
+    description: "Premium semiconductors, connectors, ICs, relays, and precision passive components engineered for demanding industrial environments.",
     icon: Cpu,
   },
   {
-    title: "PCB & Assembly Solutions",
-    description: "Reliable PCB fabrication and assembly services with high precision, quality assurance, and scalable production support.",
+    title: "PCB Fabrication & Assembly",
+    description: "High-reliability PCB manufacturing and turnkey assembly with stringent quality control and full traceability.",
     icon: CircuitBoard,
   },
   {
-    title: "Industrial Automation Products",
-    description: "Automation hardware and smart control systems designed to improve efficiency, productivity, and operational reliability.",
+    title: "Industrial Automation",
+    description: "Advanced control systems, sensors, PLCs, and smart automation solutions for maximum efficiency and uptime.",
     icon: Factory,
   },
   {
     title: "Safety & Protection Systems",
-    description: "Advanced safety equipment and protective solutions for secure industrial and manufacturing environments.",
+    description: "Industrial-grade safety equipment, surge protection, and environmental monitoring for secure operations.",
     icon: ShieldCheck,
   },
   {
     title: "Custom Engineering Solutions",
-    description: "Tailored product engineering and sourcing solutions designed to meet specific business and technical requirements.",
+    description: "Bespoke product development, value engineering, and specialized sourcing tailored to your requirements.",
     icon: Settings,
   },
   {
-    title: "Supply & Logistics Support",
-    description: "End-to-end procurement, inventory coordination, and reliable logistics support for uninterrupted operations.",
+    title: "Supply Chain & Logistics",
+    description: "End-to-end procurement, strategic inventory management, and reliable global logistics support.",
     icon: Truck,
   },
 ];
 
 const whyChooseUs = [
-  "Reliable sourcing and verified product quality",
-  "Scalable solutions for startups and enterprises",
-  "Technical consultation and engineering support",
-  "Fast procurement and dependable delivery",
+  "Curated network of verified manufacturers and tier-1 suppliers",
+  "Technical expertise and engineering consultation at every stage",
+  "Scalable solutions for startups and large enterprises",
+  "Consistent quality assurance with full documentation",
 ];
 
 const highlights = [
-  "High-performance industrial and electronic product range",
-  "Custom sourcing based on business requirements",
-  "Cost-efficient and quality-assured procurement process",
-  "Dedicated support for product inquiries and partnerships",
+  "Extensive range of high-performance industrial products",
+  "Custom sourcing and value-added engineering services",
+  "Competitive pricing with uncompromising quality",
+  "Dedicated technical support and long-term partnership",
 ];
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    scale: 1,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-white text-black overflow-hidden">
-      {/* HERO SECTION */}
-      <section className="bg-white py-24 md:py-32 border-b border-zinc-100 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#3b82f610_1px,transparent_1px)] bg-[length:40px_40px]" />
+    <div className="min-h-screen bg-white text-zinc-900 overflow-hidden">
+      {/* HERO SECTION - Navy with subtle silver pattern */}
+      <section className="relative bg-[#0A1428] text-white py-32 md:py-44 overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] bg-[length:50px_50px]" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md mb-10 text-sm tracking-[2px] font-medium"
+            >
+              SOURCE X • ESTABLISHED 2018
+            </motion.div>
 
-        <div className="max-w-7xl mx-auto px-6 text-center relative">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-          >
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-blue-100 bg-blue-50 mb-8">
-              <div className="w-3 h-3 bg-blue-600 rounded-full animate-pulse" />
-              <span className="uppercase text-sm tracking-[3px] text-blue-600 font-medium">
-                SourceX — Engineering Excellence
+            <motion.h1
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-8"
+            >
+              Precision Components.<br />
+              <span className="bg-gradient-to-r from-[#A8B5D1] via-white to-[#A8B5D1] bg-clip-text text-transparent">
+                Engineered for Excellence
               </span>
-            </div>
+            </motion.h1>
 
-            <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter mb-6 text-black">
-              Powering Industries with<br />
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
-                Reliable Technology
-              </span>
-            </h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 1 }}
+              className="text-xl md:text-2xl text-zinc-400 leading-relaxed max-w-3xl mx-auto mb-14"
+            >
+              Delivering high-performance electronic, automation, and engineering solutions with 
+              uncompromising quality and reliability.
+            </motion.p>
 
-            <p className="max-w-3xl mx-auto text-xl text-zinc-700 mb-10 leading-relaxed">
-              Discover our comprehensive range of high-performance electronic, automation,
-              and engineering products engineered for innovation, efficiency, and long-term reliability.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.9 }}
+              className="flex flex-col sm:flex-row gap-5 justify-center"
+            >
+              <Link
+                href="#products"
+                className="group inline-flex items-center justify-center gap-3 bg-white text-[#0A1428] hover:bg-zinc-100 px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300 shadow-xl"
+              >
+                Explore Portfolio
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  href="#products"
-                  className="group inline-flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 shadow-lg shadow-blue-500/20"
-                >
-                  Explore Our Products
-                  <ArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
-                </Link>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  href="#quote"
-                  className="inline-flex items-center justify-center gap-3 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-10 py-4 rounded-2xl font-semibold text-lg transition-all duration-300"
-                >
-                  Request a Quote
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
+              <Link
+                href="#quote"
+                className="group inline-flex items-center justify-center gap-3 border-2 border-white/70 hover:border-white hover:bg-white/10 px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300"
+              >
+                Request Consultation
+              </Link>
+            </motion.div>
+          </div>
         </div>
+
+        {/* Floating subtle glow */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-3 h-3 bg-white/30 rounded-full animate-pulse" />
       </section>
 
       {/* PRODUCTS GRID */}
-      <section id="products" className="py-24 bg-white">
+      <section id="products" className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-black mb-4">
-              Our Product Portfolio
+          <div className="text-center mb-16">
+            <div className="uppercase tracking-[3px] text-[#0A1428] text-sm font-medium mb-3">OUR EXPERTISE</div>
+            <h2 className="text-5xl font-semibold tracking-tighter mb-4 text-[#0A1428]">
+              Product Portfolio
             </h2>
-            <p className="text-zinc-700 text-lg max-w-2xl mx-auto">
-              High-quality solutions across electronics, industrial automation, safety systems,
-              and complete supply chain support.
+            <p className="text-zinc-600 text-lg max-w-2xl mx-auto">
+              Carefully curated solutions that drive innovation and reliability across industries
             </p>
-          </motion.div>
+          </div>
 
           <motion.div
             variants={containerVariants}
@@ -166,28 +172,33 @@ export default function ProductsPage() {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  whileHover={{ y: -12, transition: { duration: 0.4 } }}
-                  className="group bg-white border border-zinc-200 rounded-3xl p-10 hover:border-blue-600 hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
+                  whileHover={{ y: -12, scale: 1.02 }}
+                  className="group bg-white border border-zinc-200 hover:border-[#0A1428] rounded-3xl p-10 flex flex-col h-full transition-all duration-500 hover:shadow-2xl hover:shadow-[#0A1428]/10"
                 >
-                  <div className="w-20 h-20 flex items-center justify-center bg-blue-50 rounded-2xl mb-8 group-hover:bg-blue-100 transition-all duration-300">
-                    <Icon className="w-11 h-11 text-blue-600 transition-transform group-hover:scale-110 duration-300" />
-                  </div>
+                  <motion.div 
+                    className="w-16 h-16 flex items-center justify-center bg-zinc-100 rounded-2xl mb-9 group-hover:bg-[#0A1428] transition-all duration-500"
+                    whileHover={{ rotate: 8, scale: 1.1 }}
+                  >
+                    <Icon className="w-9 h-9 text-zinc-700 group-hover:text-white transition-colors duration-500" />
+                  </motion.div>
 
-                  <h3 className="text-2xl font-semibold mb-5 text-black">
+                  <h3 className="text-2xl font-semibold tracking-tight mb-5 text-[#0A1428]">
                     {product.title}
                   </h3>
 
-                  <p className="text-zinc-700 flex-1 leading-relaxed">
+                  <p className="text-zinc-600 flex-1 leading-relaxed">
                     {product.description}
                   </p>
 
-                  <Link
-                    href="#"
-                    className="mt-10 inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold group-hover:gap-3 transition-all duration-300"
-                  >
-                    Learn More
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  <div className="mt-10 pt-6 border-t border-zinc-100">
+                    <Link
+                      href="#"
+                      className="inline-flex items-center gap-2 font-semibold text-sm text-[#0A1428] group-hover:gap-3 transition-all"
+                    >
+                      Discover Solution
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </div>
                 </motion.div>
               );
             })}
@@ -195,35 +206,35 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US + HIGHLIGHTS */}
-      <section className="py-24 bg-zinc-50">
+      {/* WHY CHOOSE US + HIGHLIGHTS - Navy Section */}
+      <section className="py-28 bg-[#0A1428] text-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Why Choose Us */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.9 }}
             >
-              <div className="text-blue-600 font-medium tracking-widest text-sm mb-3">WHY PARTNER WITH US</div>
-              <h2 className="text-4xl font-semibold tracking-tight text-black mb-10">
-                Trusted Product Partner for Scalable Growth
+              <div className="text-[#A8B5D1] font-medium tracking-widest text-sm mb-4">PARTNERSHIP BEYOND SUPPLY</div>
+              <h2 className="text-5xl font-semibold tracking-tighter leading-none mb-12">
+                Why Industry Leaders Choose SourceX
               </h2>
 
-              <div className="space-y-8">
+              <div className="space-y-10">
                 {whyChooseUs.map((point, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="flex gap-5"
+                    transition={{ delay: idx * 0.15 }}
+                    className="flex gap-6"
                   >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mt-1 font-bold text-lg">
-                      ✓
+                    <div className="flex-shrink-0 w-8 h-8 mt-1 rounded-full border border-[#A8B5D1]/30 flex items-center justify-center">
+                      <div className="w-3 h-3 bg-[#A8B5D1] rounded-full" />
                     </div>
-                    <p className="text-lg text-black leading-relaxed">{point}</p>
+                    <p className="text-lg text-zinc-300 leading-relaxed">{point}</p>
                   </motion.div>
                 ))}
               </div>
@@ -231,23 +242,23 @@ export default function ProductsPage() {
 
             {/* Highlights */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
+              initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="bg-white border border-zinc-100 rounded-3xl p-12 shadow-sm"
+              transition={{ duration: 0.9 }}
+              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-12"
             >
-              <h3 className="text-2xl font-semibold mb-8 text-black">Product Highlights</h3>
-              <ul className="space-y-6">
+              <h3 className="text-3xl font-semibold mb-10">What Sets Us Apart</h3>
+              <ul className="space-y-8">
                 {highlights.map((item, index) => (
                   <motion.li
                     key={index}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-start gap-4 text-black"
+                    transition={{ delay: index * 0.15 }}
+                    className="flex gap-5 text-zinc-300"
                   >
-                    <span className="text-blue-600 text-2xl leading-none mt-0.5">•</span>
+                    <span className="text-[#A8B5D1] text-2xl mt-0.5">↗</span>
                     <span className="text-[17px] leading-relaxed">{item}</span>
                   </motion.li>
                 ))}
@@ -258,49 +269,51 @@ export default function ProductsPage() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section id="quote" className="py-24 bg-blue-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] bg-[length:30px_30px]" />
-
-        <div className="max-w-4xl mx-auto text-center px-6 relative">
+      <section id="quote" className="py-28 bg-white border-t border-zinc-100">
+        <div className="max-w-4xl mx-auto text-center px-6">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-white"
+            className="text-5xl font-semibold tracking-tighter mb-6 text-[#0A1428]"
           >
-            Looking for the Right Product Solution?
+            Ready to Source Smarter?
           </motion.h2>
 
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto"
+            transition={{ delay: 0.2 }}
+            className="text-xl text-zinc-600 max-w-2xl mx-auto mb-12"
           >
-            Connect with our expert team to discuss your specific requirements and find the perfect products for your business.
+            Connect with our experts to discover the perfect components and solutions for your project.
           </motion.p>
 
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
                 href="#"
-                className="bg-white hover:bg-zinc-100 text-blue-600 font-semibold px-12 py-5 rounded-2xl text-lg transition-all flex items-center justify-center gap-3 group shadow-xl"
+                className="group inline-flex items-center justify-center gap-3 bg-[#0A1428] hover:bg-black text-white px-12 py-5 rounded-2xl font-semibold text-lg transition-all shadow-xl"
               >
-                Get a Custom Quote
+                Request a Custom Quote
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
               <Link
-                href="#"
-                className="border-2 border-white hover:bg-white hover:text-blue-600 px-12 py-5 rounded-2xl text-lg font-medium transition-all"
+                href="tel:+919876543210"
+                className="inline-flex items-center justify-center gap-3 border-2 border-[#0A1428] hover:bg-[#0A1428] hover:text-white px-12 py-5 rounded-2xl font-semibold text-lg transition-all"
               >
-                Speak with Our Team
+                Schedule a Call
               </Link>
             </motion.div>
           </div>
+
+          <p className="text-sm text-zinc-500 mt-12">
+            Average response time: <span className="font-medium text-[#0A1428]">Under 4 hours</span>
+          </p>
         </div>
       </section>
     </div>

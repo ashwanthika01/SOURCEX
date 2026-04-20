@@ -171,10 +171,10 @@ export default function CTAFooter() {
         <div className="md:col-span-3">
           <h4 className="text-white/80 font-medium mb-4">Company</h4>
 
-          <div className="flex flex-col gap-2 text-sm text-white/80">
-            <a href="/about" className="hover:text-white transition">About Us</a>
-            <a href="/services" className="hover:text-white transition">Our Services</a>
-            <a href="/products" className="hover:text-white transition">Products</a>
+          <div className="flex flex-col gap-2 text-sm text-white/80 relative z-10">
+            <a href="/nabout" className="hover:text-white transition">About Us</a>
+            <a href="/nservices" className="hover:text-white transition">Our Services</a>
+            <a href="/nproducts" className="hover:text-white transition">Products</a>
             <a href="/contact" className="hover:text-white transition">Contact</a>
           </div>
         </div>

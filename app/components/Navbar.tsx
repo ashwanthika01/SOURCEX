@@ -85,7 +85,7 @@ export default function Navbar() {
 
             {/* CTA Button */}
             <Link
-              href="/nquote"
+              href="/Footer"
               className={`ml-4 rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
                 active
                   ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
@@ -137,7 +137,7 @@ export default function Navbar() {
           ))}
 
           <Link
-            href="/nquote"
+            href="/Footer"
             className="mt-4 rounded-full bg-blue-600 px-6 py-3 text-white text-center font-medium"
             onClick={() => setOpen(false)}
           >

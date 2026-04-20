@@ -1,5 +1,6 @@
 export default function Hero() {
   return (
+  
     <section id="top" className="relative h-screen w-full overflow-hidden flex items-center">
 
       {/* 🎥 Background Video */}
@@ -22,7 +23,7 @@ export default function Hero() {
         <div className="max-w-2xl space-y-6">
           
           {/* ✅ Tag (fixed) */}
-          <span className="inline-flex items-center rounded-full bg-white/15 backdrop-blur px-5 py-1.5 text-[13px] font-medium text-white/95">
+          <span className="inline-flex items-center rounded-full  backdrop-blur px-5 py-1.5 text-[13px] font-medium text-white/95">
             Electronic Component Sourcing · BOM Fulfillment
           </span>
 
@@ -52,7 +53,7 @@ export default function Hero() {
 
             {/* ✅ View services (fixed) */}
             <a
-              href="#services"
+              href="/nservices"
               className="text-white text-sm font-medium hover:text-blue-300 transition"
             >
               View services →
@@ -78,5 +79,6 @@ export default function Hero() {
   </a>
 </div>
     </section>
+  
   );
 }
