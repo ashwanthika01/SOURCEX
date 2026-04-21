@@ -27,9 +27,28 @@ export default function Navbar() {
 
   const active = hovered || scrolled;
 
+  // ✅ SCROLL FUNCTION
+  const scrollToForm = () => {
+    const formElement = document.getElementById("inquiry-form");
+
+    if (formElement) {
+      const offset = 80;
+      const elementPosition = formElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    } else {
+      // fallback → go to homepage then scroll
+      window.location.href = "/#inquiry-form";
+    }
+  };
+
   return (
     <>
-      {/* NAVBAR WRAPPER */}
+      {/* NAVBAR */}
       <motion.div
         className="fixed top-4 left-0 w-full z-50 flex justify-center px-4"
         onMouseEnter={() => setHovered(true)}
@@ -59,7 +78,7 @@ export default function Navbar() {
             </div>
 
             <div
-              className={`text-xl font-semibold tracking-tight leading-none transition-colors ${
+              className={`text-xl font-semibold tracking-tight transition-colors ${
                 active ? "text-gray-900" : "text-white"
               }`}
             >
@@ -83,9 +102,9 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {/* CTA Button */}
-            <Link
-              href="/Footer"
+            {/* ✅ FIXED BUTTON */}
+            <button
+              onClick={scrollToForm}
               className={`ml-4 rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
                 active
                   ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
@@ -93,21 +112,21 @@ export default function Navbar() {
               }`}
             >
               Get a Quote
-            </Link>
+            </button>
           </div>
 
-          {/* MOBILE HAMBURGER */}
+          {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden flex flex-col gap-1.5"
           >
             <span
-              className={`w-6 h-0.5 transition-all ${
+              className={`w-6 h-0.5 ${
                 active ? "bg-gray-900" : "bg-white"
               }`}
             />
             <span
-              className={`w-6 h-0.5 transition-all ${
+              className={`w-6 h-0.5 ${
                 active ? "bg-gray-900" : "bg-white"
               }`}
             />
@@ -129,20 +148,23 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-gray-800 hover:text-blue-600 py-1 transition"
+              className="text-gray-800 hover:text-blue-600 py-1"
               onClick={() => setOpen(false)}
             >
               {link.label}
             </Link>
           ))}
 
-          <Link
-            href="/Footer"
+          {/* ✅ FIXED MOBILE BUTTON */}
+          <button
+            onClick={() => {
+              setOpen(false);
+              scrollToForm();
+            }}
             className="mt-4 rounded-full bg-blue-600 px-6 py-3 text-white text-center font-medium"
-            onClick={() => setOpen(false)}
           >
             Get a Quote
-          </Link>
+          </button>
         </div>
       </motion.div>
     </>
