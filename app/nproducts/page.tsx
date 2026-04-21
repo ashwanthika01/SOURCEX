@@ -80,71 +80,97 @@ const itemVariants = {
 export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-white text-zinc-900 overflow-hidden">
-      {/* HERO SECTION - Navy with subtle silver pattern */}
-      <section className="relative bg-[#0A1428] text-white py-32 md:py-44 overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] bg-[length:50px_50px]" />
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md mb-10 text-sm tracking-[2px] font-medium"
-            >
-              SOURCE X • ESTABLISHED 2018
-            </motion.div>
+      {/* HERO SECTION - Smooth Flowing Background */}
+     <section className="relative bg-[#0A1428] text-white py-32 md:py-44 overflow-hidden min-h-[90vh] flex items-center">
+  
+  {/* Primary Deep Gradient (Base) */}
+  <div className="absolute inset-0 bg-[linear-gradient(120deg,#0A1428_0%,#0F1E3D_30%,#1A2E5C_55%,#0F1E3D_75%,#0A1428_100%)] 
+                  bg-[length:250%_250%] animate-[flow_32s_ease_infinite]" />
 
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-8"
-            >
-              Precision Components.<br />
-              <span className="bg-gradient-to-r from-[#A8B5D1] via-white to-[#A8B5D1] bg-clip-text text-transparent">
-                Engineered for Excellence
-              </span>
-            </motion.h1>
+  {/* Secondary Soft Flow Layer */}
+  <div className="absolute inset-0 opacity-60 bg-[linear-gradient(60deg,#1E3A8A_0%,transparent_40%,#3B82F6_60%,transparent_100%)] 
+                  bg-[length:300%_300%] animate-[flowReverse_40s_ease_infinite]" />
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 1 }}
-              className="text-xl md:text-2xl text-zinc-400 leading-relaxed max-w-3xl mx-auto mb-14"
-            >
-              Delivering high-performance electronic, automation, and engineering solutions with 
-              uncompromising quality and reliability.
-            </motion.p>
+  {/* Metallic Sweep Effect (like logo shine) */}
+  <div className="absolute inset-0">
+    <div className="absolute -top-1/2 left-[-20%] w-[140%] h-[200%] 
+                    bg-[linear-gradient(120deg,transparent_30%,rgba(168,181,209,0.08)_50%,transparent_70%)] 
+                    animate-[shine_18s_linear_infinite]" />
+  </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.9 }}
-              className="flex flex-col sm:flex-row gap-5 justify-center"
-            >
-              <Link
-                href="#products"
-                className="group inline-flex items-center justify-center gap-3 bg-white text-[#0A1428] hover:bg-zinc-100 px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300 shadow-xl"
-              >
-                Explore Portfolio
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+  {/* Subtle Grid Texture */}
+  <div className="absolute inset-0 bg-[radial-gradient(#A8B5D115_1px,transparent_1px)] bg-[length:60px_60px]" />
 
-              <Link
-                href="#quote"
-                className="group inline-flex items-center justify-center gap-3 border-2 border-white/70 hover:border-white hover:bg-white/10 px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300"
-              >
-                Request Consultation
-              </Link>
-            </motion.div>
-          </div>
-        </div>
+  {/* Logo Glow (very subtle branding) */}
+  <div className="absolute inset-0 flex items-center justify-center opacity-[0.04]">
+    <img src="/SourceX.png" alt="logo" className="w-[600px] object-contain" />
+  </div>
 
-        {/* Floating subtle glow */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-3 h-3 bg-white/30 rounded-full animate-pulse" />
-      </section>
+  {/* Soft Light Beams */}
+  <div className="absolute inset-0 opacity-20">
+    <div className="absolute left-[25%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#A8B5D1] to-transparent animate-[beam_28s_linear_infinite]" />
+    <div className="absolute left-[70%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#A8B5D1] to-transparent animate-[beam_36s_linear_infinite_6s]" />
+  </div>
+
+  <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <div className="max-w-4xl mx-auto text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md mb-10 text-sm tracking-[2px] font-medium"
+      >
+        SOURCE X • ESTABLISHED 2018
+      </motion.div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1 }}
+        className="text-6xl md:text-7xl font-semibold tracking-tighter leading-none mb-8"
+      >
+        Precision Components.<br />
+        <span className="bg-gradient-to-r from-[#A8B5D1] via-white to-[#A8B5D1] bg-clip-text text-transparent">
+          Engineered for Excellence
+        </span>
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4, duration: 1 }}
+        className="text-xl md:text-2xl text-zinc-400 leading-relaxed max-w-3xl mx-auto mb-14"
+      >
+        Delivering high-performance electronic, automation, and engineering solutions with 
+        uncompromising quality and reliability.
+      </motion.p>
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.9 }}
+        className="flex flex-col sm:flex-row gap-5 justify-center"
+      >
+        <Link
+          href="#products"
+          className="group inline-flex items-center justify-center gap-3 bg-white text-[#0A1428] hover:bg-zinc-100 px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300 shadow-2xl"
+        >
+          Explore Portfolio
+        </Link>
+
+        <Link
+          href="#quote"
+          className="group inline-flex items-center justify-center gap-3 border-2 border-white/70 hover:border-white hover:bg-white/10 px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300"
+        >
+          Request Consultation
+        </Link>
+      </motion.div>
+    </div>
+  </div>
+
+  {/* Bottom fade */}
+  <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+</section>
 
       {/* PRODUCTS GRID */}
       <section id="products" className="py-28 bg-white">

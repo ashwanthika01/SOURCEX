@@ -15,11 +15,29 @@
     --foreground: #ededed;
   }
 }
+@keyframes slowFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
+@keyframes lineFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 400px; }
+}
+
+@keyframes beam {
+  0% { transform: translateY(-150%); }
+  100% { transform: translateY(400%); }
+}
 html {
   scroll-behavior: smooth;
 }
-
+@keyframes flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 body {
   background: var(--background);
   color: var(--foreground);
