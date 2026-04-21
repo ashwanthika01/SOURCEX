@@ -10,7 +10,7 @@ import {
   Lightbulb,
   ArrowRight,
 } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const values = [
   {
@@ -40,19 +40,24 @@ const fadeUp = {
 };
 
 export default function AboutPage() {
+  const router = useRouter();
+
+  // ✅ Navigate to footer form (works from any page)
+  const goToFooter = () => {
+    router.push("/#inquiry-form");
+  };
+
   return (
     <main className="min-h-screen bg-white text-black overflow-hidden">
 
       {/* ================= HERO ================= */}
       <section className="relative pt-32 pb-28 overflow-hidden">
 
-        {/* FLOWING BACKGROUND */}
         <div className="absolute inset-0 bg-[linear-gradient(120deg,#f8fafc_0%,#eef2ff_30%,#e0f2fe_60%,#f8fafc_100%)] 
                         bg-[length:300%_300%] animate-[flow_25s_ease_infinite]" />
 
         <div className="absolute inset-0 bg-[radial-gradient(#3b82f615_1px,transparent_1px)] bg-[length:50px_50px]" />
 
-        {/* subtle glow */}
         <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] 
                         bg-blue-500/10 blur-[120px] rounded-full" />
 
@@ -107,7 +112,6 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
-          {/* Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {[
               { icon: Building2, title: "Strong Foundation", desc: "Built on trust and expertise." },
@@ -138,89 +142,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ================= MISSION ================= */}
-      <section className="py-24 bg-[#0A1428] text-white relative overflow-hidden">
-
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,#0A1428_0%,#1e3a8a_50%,#0A1428_100%)] 
-                        bg-[length:250%_250%] animate-[flow_30s_linear_infinite]" />
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-10">
-
-          {[
-            {
-              icon: Target,
-              title: "Our Mission",
-              text: "To provide dependable high-quality products and intelligent sourcing solutions.",
-            },
-            {
-              icon: Eye,
-              title: "Our Vision",
-              text: "To become the most trusted industry leader recognized for excellence.",
-            },
-          ].map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                className="bg-white/10 backdrop-blur-lg border border-white/10 rounded-3xl p-12"
-              >
-                <Icon className="w-14 h-14 text-blue-300 mb-6" />
-                <h2 className="text-3xl font-bold mb-4">{item.title}</h2>
-                <p className="text-zinc-300">{item.text}</p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ================= VALUES ================= */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-
-          <motion.div variants={fadeUp} initial="hidden" whileInView="show" className="text-center mb-16">
-            <h2 className="text-4xl font-bold">Core Values</h2>
-            <p className="text-zinc-600 mt-4">What drives everything we do</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {values.map((value, i) => {
-              const Icon = value.icon;
-              return (
-                <motion.div
-                  key={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="bg-white border rounded-3xl p-10 hover:shadow-2xl transition"
-                >
-                  <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
-                    <Icon className="text-blue-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                  <p className="text-zinc-600">{value.description}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* ================= CTA ================= */}
       <section className="py-24 bg-blue-600 text-white text-center">
         <h2 className="text-4xl font-bold mb-6">Let’s Build Together</h2>
         <p className="mb-10 text-lg">Partner with SourceX for smarter sourcing</p>
 
-        <Link
-          href="/inquiry-form"
-          className="inline-flex items-center gap-3 bg-white text-blue-600 px-10 py-4 rounded-xl font-semibold"
+        {/* ✅ FIXED BUTTON */}
+        <button
+          onClick={goToFooter}
+          className="inline-flex items-center gap-3 bg-white text-blue-600 px-10 py-4 rounded-xl font-semibold hover:bg-blue-50 transition"
         >
           Get a Quote <ArrowRight />
-        </Link>
+        </button>
       </section>
     </main>
   );

@@ -12,8 +12,29 @@ import {
 import Link from "next/link";
 
 export default function NContactPage() {
+
+  // ✅ SCROLL TO FOOTER FORM
+  const scrollToForm = () => {
+    const formElement = document.getElementById("inquiry-form");
+
+    if (formElement) {
+      const offset = 80;
+      const elementPosition = formElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    } else {
+      // fallback if footer is not in current page yet
+      window.location.href = "/#inquiry-form";
+    }
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-white text-white">
+
       {/* HERO SECTION */}
       <section className="relative pt-36 pb-20 px-6 md:px-12 lg:px-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.25),transparent_30%),radial-gradient(circle_at_left,rgba(14,165,233,0.18),transparent_25%)]" />
@@ -54,7 +75,8 @@ export default function NContactPage() {
       {/* CONTACT SECTION */}
       <section className="px-6 md:px-12 lg:px-20 pb-24">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
-          {/* LEFT SIDE - CONTACT INFO */}
+
+          {/* LEFT SIDE */}
           <motion.div
             initial={{ opacity: 0, x: -35 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -120,7 +142,7 @@ export default function NContactPage() {
             </div>
           </motion.div>
 
-          {/* RIGHT SIDE - CONTACT FORM */}
+          {/* RIGHT SIDE FORM */}
           <motion.div
             initial={{ opacity: 0, x: 35 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -133,56 +155,13 @@ export default function NContactPage() {
             </h3>
 
             <form className="space-y-5">
-              <div>
-                <label className="block text-sm text-slate-300 mb-2">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-white placeholder:text-slate-400 outline-none focus:border-blue-500"
-                />
-              </div>
+              <input className="input" placeholder="Full Name" />
+              <input className="input" placeholder="Email Address" />
+              <input className="input" placeholder="Subject" />
+              <textarea className="input" rows={5} placeholder="Message" />
 
-              <div>
-                <label className="block text-sm text-slate-300 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-white placeholder:text-slate-400 outline-none focus:border-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-slate-300 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter subject"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-white placeholder:text-slate-400 outline-none focus:border-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-slate-300 mb-2">
-                  Message
-                </label>
-                <textarea
-                  rows={5}
-                  placeholder="Write your message..."
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-white placeholder:text-slate-400 outline-none focus:border-blue-500 resize-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-blue-600 px-6 py-3.5 text-white font-medium hover:bg-blue-700 transition shadow-lg"
-              >
-                Send Message
-                <Send className="w-4 h-4" />
+              <button className="w-full bg-blue-600 py-3 rounded-xl">
+                Send Message <Send />
               </button>
             </form>
           </motion.div>
@@ -191,36 +170,34 @@ export default function NContactPage() {
 
       {/* CTA SECTION */}
       <section className="py-24 px-6 md:px-12 lg:px-20 bg-slate-950 text-white">
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="max-w-5xl mx-auto text-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-10 md:p-14 shadow-2xl"
-        >
-          <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+        <motion.div className="max-w-5xl mx-auto text-center rounded-3xl border border-white/10 bg-white/5 p-10">
+          
+          <h2 className="text-3xl md:text-5xl font-bold">
             Ready to Start Your Next Project?
           </h2>
-          <p className="mt-5 text-slate-300 max-w-2xl mx-auto text-lg">
-            Let SourceX support your business with reliable products, smart
-            sourcing, and trusted technical solutions.
+
+          <p className="mt-5 text-slate-300 text-lg">
+            Let SourceX support your business
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              href="/inquiry-form"
+
+            {/* ✅ UPDATED BUTTON */}
+            <button
+              onClick={scrollToForm}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-8 py-3.5 text-white font-medium hover:bg-blue-700 transition"
             >
               Get a Quote
               <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
 
             <Link
               href="/nproducts"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3.5 text-white font-medium hover:bg-white/10 transition"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5"
             >
               Explore Products
             </Link>
+
           </div>
         </motion.div>
       </section>
