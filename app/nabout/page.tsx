@@ -1,159 +1,327 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
-  Building2,
-  Target,
-  Eye,
-  Users,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { useEffect } from "react";
+import {
   ShieldCheck,
   Lightbulb,
   ArrowRight,
+  Package,
+  Settings,
+  Globe,
+  Monitor,
+  DollarSign,
+  TrendingUp,
+  Headphones,
+  Share2,
+  Truck,
+  Users,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const values = [
-  {
-    title: "Innovation",
-    description: "We embrace modern technology and forward-thinking solutions to meet evolving industry needs.",
-    icon: Lightbulb,
-  },
-  {
-    title: "Trust & Quality",
-    description: "We prioritize product reliability, transparency, and quality in every solution we deliver.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Customer Focus",
-    description: "We build long-term partnerships by understanding client needs and delivering tailored support.",
-    icon: Users,
-  },
-];
-
+/* ---------------- ANIMATIONS ---------------- */
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 60, filter: "blur(10px)" },
   show: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.15 } },
+};
+
+/* ---------------- CORE VALUES ---------------- */
+const coreValues = [
+  {
+    icon: Lightbulb,
+    title: "Innovation",
+    points: [
+      "Adopting modern technologies",
+      "Creative problem solving",
+      "Continuous improvement mindset",
+    ],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Reliability",
+    points: [
+      "Consistent product quality",
+      "Trusted global sourcing",
+      "Secure and transparent processes",
+    ],
+  },
+  {
+    icon: Users,
+    title: "Customer Focus",
+    points: [
+      "Understanding client needs",
+      "Fast and responsive support",
+      "Long-term partnerships",
+    ],
+  },
+];
+
+/* ---------------- 3D CARD ---------------- */
+function TiltCard({ children }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const rotateX = useTransform(y, [-100, 100], [10, -10]);
+  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+
+  return (
+    <motion.div
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        x.set(e.clientX - rect.left - rect.width / 2);
+        y.set(e.clientY - rect.top - rect.height / 2);
+      }}
+      onMouseLeave={() => {
+        x.set(0);
+        y.set(0);
+      }}
+      style={{ rotateX, rotateY }}
+      whileHover={{ scale: 1.05 }}
+      className="group relative p-8 rounded-3xl bg-white border shadow-xl transition overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/0 via-blue-200/40 to-indigo-100/0 opacity-0 group-hover:opacity-100 transition blur-xl" />
+      {children}
+    </motion.div>
+  );
+}
+
+/* ---------------- FEATURES DATA ---------------- */
+const features = [
+  { icon: Package, title: "Quality Products" },
+  { icon: Settings, title: "Design Development" },
+  { icon: Globe, title: "Infrastructure" },
+  { icon: Monitor, title: "Technical Support" },
+  { icon: DollarSign, title: "Multi-currency Billing" },
+  { icon: Lightbulb, title: "Innovation" },
+  { icon: TrendingUp, title: "Competitive Pricing" },
+  { icon: Headphones, title: "Customer Service" },
+  { icon: Share2, title: "80+ Supplier Lines" },
+  { icon: Truck, title: "JIT Deliveries" },
+];
+
 export default function AboutPage() {
   const router = useRouter();
 
-  // ✅ Navigate to footer form (works from any page)
-  const goToFooter = () => {
-    router.push("/#inquiry-form");
-  };
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const smoothX = useSpring(mouseX, { damping: 30 });
+  const smoothY = useSpring(mouseY, { damping: 30 });
+
+  useEffect(() => {
+    const move = (e) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
+
+  const words = "Future Ready Tech Sourcing".split(" ");
 
   return (
-    <main className="min-h-screen bg-white text-black overflow-hidden">
+    <main className="bg-white text-black overflow-hidden">
 
-      {/* ================= HERO ================= */}
-      <section className="relative pt-32 pb-28 overflow-hidden">
+      {/* GLOW */}
+      <motion.div
+        className="pointer-events-none fixed top-0 left-0 w-[500px] h-[500px] bg-blue-400/20 rounded-full blur-[120px]"
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      />
 
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,#f8fafc_0%,#eef2ff_30%,#e0f2fe_60%,#f8fafc_100%)] 
-                        bg-[length:300%_300%] animate-[flow_25s_ease_infinite]" />
+      {/* HERO */}
+      <section className="relative pt-24 pb-16 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-[conic-gradient(at_top,_#e0f2fe,_#eef2ff,_#f0f9ff,_#e0f2fe)] opacity-60 animate-[spin_30s_linear_infinite]" />
 
-        <div className="absolute inset-0 bg-[radial-gradient(#3b82f615_1px,transparent_1px)] bg-[length:50px_50px]" />
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+          className="relative z-10 max-w-5xl mx-auto px-6"
+        >
+          <motion.span className="px-6 py-2 border rounded-full bg-white/60 text-blue-600 text-sm">
+            ABOUT SOURCEX
+          </motion.span>
 
-        <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] 
-                        bg-blue-500/10 blur-[120px] rounded-full" />
+          <h1 className="mt-8 text-5xl md:text-7xl font-extrabold">
+            {words.map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15 }}
+                className="mr-3 inline-block"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
 
-        <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-          <motion.div variants={fadeUp} initial="hidden" animate="show">
+          <p className="mt-6 text-zinc-600 max-w-xl mx-auto">
+            We combine innovation, sourcing expertise, and reliability to help businesses scale faster.
+          </p>
 
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-blue-200 bg-white/70 backdrop-blur-md mb-8 shadow-sm">
-              <div className="w-3 h-3 bg-blue-600 rounded-full animate-pulse" />
-              <span className="uppercase text-sm tracking-[3px] font-medium text-blue-600">
-                About SourceX
-              </span>
-            </div>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            onClick={() => router.push("/#inquiry-form")}
+            className="mt-8 px-8 py-3 bg-blue-600 text-white rounded-xl"
+          >
+            Get Started <ArrowRight className="inline ml-2" />
+          </motion.button>
 
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight mb-8">
-              Empowering Businesses Through
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Technology & Smart Sourcing
-              </span>
-            </h1>
-
-            <p className="max-w-3xl mx-auto text-xl text-zinc-700 leading-relaxed">
-              SourceX is a trusted partner delivering high-quality electronic components,
-              automation solutions, and reliable sourcing support that help businesses grow with confidence.
-            </p>
-          </motion.div>
-        </div>
+          <div className="w-20 h-1 bg-blue-600 mx-auto mt-10 rounded-full"></div>
+        </motion.div>
       </section>
 
-      {/* ================= OVERVIEW ================= */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      {/* ================= WHAT WE OFFER (ADDED) ================= */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
 
-          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            <div className="text-blue-600 font-semibold tracking-widest text-sm mb-4">
-              WHO WE ARE
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              Your Reliable Partner in Products & Solutions
-            </h2>
-
-            <div className="space-y-6 text-lg text-zinc-700">
-              <p>
-                At SourceX, we bridge the gap between business requirements and
-                high-performance technology solutions.
-              </p>
-              <p>
-                Our commitment to reliability, innovation, and customer success
-                makes us the preferred choice across industries.
-              </p>
-            </div>
+          {/* LEFT IMAGE */}
+          <motion.div
+            initial={{ opacity: 0, scale: 1.1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            className="relative h-[400px] lg:h-auto"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1581093588401-22c5e8c0a6f9"
+              alt="tech"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/10" />
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {[
-              { icon: Building2, title: "Strong Foundation", desc: "Built on trust and expertise." },
-              { icon: Target, title: "Goal Driven", desc: "Focused on measurable results." },
-              { icon: Eye, title: "Future Ready", desc: "Adapting to modern demands." },
-              { icon: Users, title: "Client First", desc: "Long-term partnerships matter." },
-            ].map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
+          {/* RIGHT CONTENT */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            className="bg-black text-white p-10 md:p-14 flex flex-col justify-center"
+          >
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-4xl font-bold mb-6">
+              What We Offer
+            </motion.h2>
+
+            <ul className="space-y-4 text-zinc-300 text-lg">
+              {[
+                "Dedicated support for low to high-volume production",
+                "Industry-certified manufacturing environments",
+                "Secure and scalable device programming",
+                "End-to-end sourcing & integration",
+                "Global delivery with seamless logistics",
+              ].map((item, i) => (
+                <motion.li
                   key={i}
                   variants={fadeUp}
-                  initial="hidden"
-                  whileInView="show"
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="group bg-white/80 backdrop-blur-lg border border-zinc-200 rounded-3xl p-8 hover:shadow-xl transition-all"
+                  className="flex items-start gap-3 group"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100">
-                    <Icon className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                  <p className="text-zinc-600">{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
+                  <span className="mt-2 w-2 h-2 bg-blue-500 rounded-full group-hover:scale-125 transition" />
+                  {item}
+                </motion.li>
+              ))}
+            </ul>
+
+            <motion.button
+              variants={fadeUp}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => router.push("/#inquiry-form")}
+              className="mt-8 w-fit px-6 py-3 bg-white text-black rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-500 hover:text-white transition"
+            >
+              Start a Project <ArrowRight />
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
-      <section className="py-24 bg-blue-600 text-white text-center">
-        <h2 className="text-4xl font-bold mb-6">Let’s Build Together</h2>
-        <p className="mb-10 text-lg">Partner with SourceX for smarter sourcing</p>
+      {/* CORE VALUES */}
+      <section className="py-20 px-6 mt-10">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+          {coreValues.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <TiltCard key={i}>
+                <Icon className="text-blue-600 mb-6" size={40} />
+                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                <ul className="text-zinc-500 space-y-2 text-left">
+                  {item.points.map((point, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-blue-600 mt-1">•</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </TiltCard>
+            );
+          })}
+        </div>
+      </section>
 
-        {/* ✅ FIXED BUTTON */}
-        <button
-          onClick={goToFooter}
-          className="inline-flex items-center gap-3 bg-white text-blue-600 px-10 py-4 rounded-xl font-semibold hover:bg-blue-50 transition"
+      {/* FEATURES */}
+      <section className="py-20 px-6 bg-zinc-50">
+        <div className="max-w-7xl mx-auto text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">Delivering Solutions</h2>
+          <p className="text-zinc-600 max-w-2xl mx-auto">
+            Powerful capabilities that drive innovation, efficiency, and scalability.
+          </p>
+        </div>
+
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
         >
-          Get a Quote <ArrowRight />
-        </button>
+          {features.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                whileHover={{ y: -10 }}
+                className="bg-white p-6 rounded-2xl border shadow-sm text-center"
+              >
+                <div className="w-14 h-14 mx-auto mb-4 bg-blue-50 flex items-center justify-center rounded-xl">
+                  <Icon className="text-blue-600" />
+                </div>
+                <h3 className="font-semibold">{item.title}</h3>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-blue-600 text-white text-center">
+        <h2 className="text-4xl font-bold mb-6">Let’s Build Together</h2>
+
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          onClick={() => router.push("/#inquiry-form")}
+          className="bg-white text-blue-600 px-8 py-3 rounded-xl"
+        >
+          Get a Quote <ArrowRight className="inline ml-2" />
+        </motion.button>
       </section>
     </main>
   );
