@@ -103,7 +103,7 @@ export default function NContactPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-white">Email</h3>
                   <p className="text-slate-300 text-sm mt-1">
-                    sourcetechnologiesx@gmail.com
+                    sourcex25@gmail.com
                   </p>
                 </div>
               </div>
@@ -123,7 +123,9 @@ export default function NContactPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-white">Location</h3>
                   <p className="text-slate-300 text-sm mt-1">
-                    Chennai, Tamil Nadu, India
+                    Plot No. 6, Ground floor ,Kamaraj Nagar ,Sipcot 1, Zuzuvadi post
+                    Hosur -635126, Tamil Nadu
+
                   </p>
                 </div>
               </div>
