@@ -5,6 +5,7 @@ import {
   motion,
   useScroll,
   useTransform,
+  AnimatePresence,
 } from "framer-motion";
 import {
   Cpu,
@@ -17,27 +18,323 @@ import {
   Star,
   Plug,
   Filter,
+  X,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const products = [
-  { title: "ARM Cortex M0+ Microcontroller", category: "ICs", type: "Critical", icon: Cpu, stock: "In Stock", rating: 4.9, description: "Main control unit for horn logic." },
-  { title: "N-Channel MOSFET", category: "Power", type: "Power", icon: Zap, stock: "In Stock", rating: 4.8, description: "High-current switching device." },
-  { title: "Voltage Regulator IC", category: "Power", type: "Critical", icon: Activity, stock: "In Stock", rating: 4.7, description: "Stable voltage supply." },
-  { title: "TVS Diode", category: "Protection", type: "Protection", icon: ShieldCheck, stock: "In Stock", rating: 4.6, description: "Spike protection." },
-  { title: "Zener Diode", category: "Protection", type: "Protection", icon: ShieldCheck, stock: "Available", rating: 4.5, description: "Voltage regulation." },
-  { title: "Rectifier Diode", category: "Protection", type: "Protection", icon: ShieldCheck, stock: "Available", rating: 4.4, description: "AC to DC conversion." },
-  { title: "PNP Transistor", category: "ICs", type: "Active", icon: Cpu, stock: "In Stock", rating: 4.4, description: "Signal switching/amplification." },
-  { title: "Electrolytic Capacitor", category: "Passive", type: "Passive", icon: Layers, stock: "In Stock", rating: 4.3, description: "Filtering and smoothing." },
-  { title: "Precision Resistor", category: "Passive", type: "Passive", icon: Layers, stock: "In Stock", rating: 4.3, description: "Voltage division." },
-  { title: "DC-DC Buck Converter IC", category: "ICs", type: "Critical", icon: Cpu, stock: "In Stock", rating: 4.9, description: "Efficient voltage step-down." },
-  { title: "Power Inductor", category: "Power", type: "Power", icon: Zap, stock: "Limited", rating: 4.7, description: "Energy storage element." },
-  { title: "Schottky Diode", category: "Power", type: "Power", icon: Zap, stock: "In Stock", rating: 4.6, description: "Low-loss switching diode." },
-  { title: "USB Output Port", category: "Connectors", type: "Critical", icon: Plug, stock: "In Stock", rating: 4.5, description: "Power delivery interface." },
-  { title: "PTC Resettable Fuse", category: "Protection", type: "Protection", icon: ShieldCheck, stock: "Available", rating: 4.6, description: "Overcurrent protection." },
-  { title: "Ceramic Capacitor", category: "Passive", type: "Passive", icon: Layers, stock: "In Stock", rating: 4.4, description: "Noise filtering." },
-  { title: "Feedback Resistor", category: "Passive", type: "Passive", icon: Layers, stock: "In Stock", rating: 4.4, description: "Voltage feedback control." },
-  { title: "General Protection Diode", category: "Protection", type: "Protection", icon: ShieldCheck, stock: "Available", rating: 4.3, description: "Reverse polarity protection." },
+  {
+    title: "ARM Cortex M0+ Microcontroller",
+    category: "ICs",
+    type: "Critical",
+    icon: Cpu,
+    stock: "In Stock",
+    rating: 4.9,
+    description: "Main control unit for horn logic.",
+    specs: [
+  "32-bit ARM Cortex-M0+",
+  "Clock Speed: Up to 48 MHz",
+  "Flash: Up to 256KB",
+  "Low Power Consumption",
+  "Interfaces: UART / SPI / I2C",
+  "Operating Voltage: 1.8V – 3.6V"
+],
+    image: "/components/mcu.png"
+  },
+
+  {
+    title: "N-Channel MOSFET",
+    category: "Power",
+    type: "Power",
+    icon: Zap,
+    stock: "In Stock",
+    rating: 4.8,
+    description: "High-current switching device.",
+    specs: [
+  "N-Channel Enhancement Mode",
+  "Vds: 30V – 100V",
+  "Current: Up to 60A",
+  "Low Rds(on)",
+  "Fast Switching",
+  "Package: TO-220 / SMD"
+],
+    image: "/components/mosfet.png"
+  },
+
+  {
+    title: "Voltage Regulator IC",
+    category: "Power",
+    type: "Critical",
+    icon: Activity,
+    stock: "In Stock",
+    rating: 4.7,
+    description: "Stable voltage supply.",
+    specs: [
+  "Type: Linear / LDO",
+  "Input: 6V – 20V",
+  "Output: 5V / Adjustable",
+  "Current: Up to 1A",
+  "Thermal Protection",
+  "Low Noise Output"
+],
+    image: "/components/regulator.png"
+  },
+
+  {
+    title: "TVS Diode",
+    category: "Protection",
+    type: "Protection",
+    icon: ShieldCheck,
+    stock: "In Stock",
+    rating: 4.6,
+    description: "Spike Protection",
+    specs: [
+      "Working Voltage: 5V – 48V",
+      "Peak Power: up to 600W",
+      "Clamping Voltage: < 77V",
+      "Response Time: < 1ps",
+      "ESD Protection: IEC compliant",
+      "Package: SMB / DO-214"
+    ],
+    image: "/components/tvs-diode.png"
+  },
+
+  {
+    title: "Zener Diode",
+    category: "Protection",
+    type: "Protection",
+    icon: ShieldCheck,
+    stock: "Available",
+    rating: 4.5,
+    description: "Voltage regulation.",
+    specs: [
+      "Zener Voltage: 3.3V – 75V",
+      "Power Rating: 500mW – 5W",
+      "Tolerance: ±2% to ±5%",
+      "Low leakage current",
+      "Package: DO-41 / SMD"
+    ],
+    image: "/components/zener-diode.png"
+  },
+
+  {
+    title: "Rectifier Diode",
+    category: "Protection",
+    type: "Power",
+    icon: Zap,
+    stock: "Available",
+    rating: 4.4,
+    description: "AC to DC conversion.",
+    specs: [
+      "Reverse Voltage: 50V – 1000V",
+      "Forward Current: 1A – 10A",
+      "Forward Drop: ~0.7V",
+      "Surge Current: up to 200A",
+      "Package: DO-41"
+    ],
+    image: "/components/rectifier-diode.png"
+  },
+
+  {
+    title: "PNP Transistor",
+    category: "ICs",
+    type: "Active",
+    icon: Zap,
+    stock: "In Stock",
+    rating: 4.4,
+    description: "Signal switching/amplification.",
+    specs: [
+      "Type: PNP BJT",
+      "Voltage: 40V",
+      "Current: 600mA",
+      "Gain: 100 – 300",
+      "Package: TO-92",
+      "Operating Temp: -55°C to +150°C"
+    ],
+    image: "/components/pnp-transistor.png"
+  },
+
+  {
+    title: "Electrolytic Capacitor",
+    category: "Passive",
+    type: "Passive",
+    icon: Layers,
+    stock: "In Stock",
+    rating: 4.3,
+    description: "Filtering and smoothing.",
+    specs: [
+      "Capacitance: 10µF – 1000µF",
+      "Voltage: 6.3V – 50V",
+      "Polarized",
+      "High ripple handling",
+      "Lifetime: 2000+ hrs",
+      "Package: Radial / SMD"
+    ],
+    image: "/components/electrolytic-capacitor.png"
+  },
+
+  {
+    title: "Precision Resistor",
+    category: "Passive",
+    type: "Passive",
+    icon: Layers,
+    stock: "In Stock",
+    rating: 4.3,
+    description: "Voltage division.",
+    specs: [
+      "Resistance: 1Ω – 10MΩ",
+      "Tolerance: ±0.1%",
+      "Low noise",
+      "High stability",
+      "Package: 0603 / 0805"
+    ],
+    image: "/components/precision-resistor.png"
+  },
+
+  {
+    title: "DC-DC Buck Converter IC",
+    category: "ICs",
+    type: "Critical",
+    icon: Cpu,
+    stock: "In Stock",
+    rating: 4.9,
+    description: "Efficient voltage step-down.",
+    specs: [
+      "Input: 4.5V – 40V",
+      "Output: 0.8V – 35V",
+      "Current: up to 3A",
+      "Efficiency: up to 95%",
+      "Protection: Thermal & Overcurrent",
+      "Package: SOIC / QFN"
+    ],
+    image: "/components/buck-converter.png"
+  },
+
+  {
+    title: "Power Inductor",
+    category: "Power",
+    type: "Power",
+    icon: Zap,
+    stock: "Limited",
+    rating: 4.7,
+    description: "Energy storage element.",
+    specs: [
+      "Inductance: 1µH – 1000µH",
+      "Current: up to 10A",
+      "Low DCR",
+      "Shielded design",
+      "Package: SMD"
+    ],
+    image: "/components/power-inductor.png"
+  },
+
+  {
+    title: "Schottky Diode",
+    category: "Power",
+    type: "Power",
+    icon: Zap,
+    stock: "In Stock",
+    rating: 4.6,
+    description: "Low-loss switching diode.",
+    specs: [
+      "Voltage: 20V – 100V",
+      "Current: 1A – 10A",
+      "Low forward drop (0.2V)",
+      "Ultra-fast switching",
+      "Package: SMA / SMB"
+    ],
+    image: "/components/schottky-diode.png"
+  },
+
+  {
+    title: "USB Output Port",
+    category: "Connectors",
+    type: "Critical",
+    icon: Plug,
+    stock: "In Stock",
+    rating: 4.5,
+    description: "Power delivery interface.",
+    specs: [
+      "Type: USB-A / USB-C",
+      "Voltage: 5V – 20V",
+      "Current: up to 5A",
+      "PD Support",
+      "Durability: 10,000 cycles"
+    ],
+    image: "/components/usb-port.png"
+  },
+
+  {
+    title: "PTC Resettable Fuse",
+    category: "Protection",
+    type: "Protection",
+    icon: ShieldCheck,
+    stock: "Available",
+    rating: 4.6,
+    description: "Overcurrent protection.",
+    specs: [
+      "Hold Current: 0.1A – 5A",
+      "Trip Current: 0.2A – 10A",
+      "Auto reset",
+      "Short circuit protection",
+      "Package: SMD"
+    ],
+    image: "/components/ptc-fuse.png"
+  },
+
+  {
+    title: "Ceramic Capacitor",
+    category: "Passive",
+    type: "Passive",
+    icon: Layers,
+    stock: "In Stock",
+    rating: 4.4,
+    description: "Noise filtering.",
+    specs: [
+      "Capacitance: 1pF – 100µF",
+      "Voltage: up to 100V",
+      "Low ESR",
+      "High-frequency performance",
+      "Package: 0402 / 0603"
+    ],
+    image: "/components/ceramic-capacitor.png"
+  },
+
+  {
+    title: "Feedback Resistor",
+    category: "Passive",
+    type: "Passive",
+    icon: Layers,
+    stock: "In Stock",
+    rating: 4.4,
+    description: "Voltage feedback control.",
+    specs: [
+      "Resistance: 10Ω – 10MΩ",
+      "Tolerance: ±0.1%",
+      "Low drift",
+      "High stability",
+      "Package: 0603 / 0805"
+    ],
+    image: "/components/feedback-resistor.png"
+  },
+
+  {
+    title: "General Protection Diode",
+    category: "Protection",
+    type: "Protection",
+    icon: ShieldCheck,
+    stock: "Available",
+    rating: 4.3,
+    description: "Reverse polarity protection.",
+    specs: [
+      "Voltage: 50V – 1000V",
+      "Current: up to 3A",
+      "Fast recovery",
+      "Low leakage",
+      "Package: DO-41 / SMD"
+    ],
+    image: "/components/general-protection-diode.png"
+  }
 ];
 
 export default function ProductsPage() {
@@ -47,6 +344,9 @@ export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showFilters, setShowFilters] = useState(false);
+
+  // 🔥 NEW STATE FOR MODAL
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -60,8 +360,7 @@ export default function ProductsPage() {
 
   const filteredProducts = products.filter(
     (p) =>
-      (selectedCategory === "All" ||
-        p.category === selectedCategory) &&
+      (selectedCategory === "All" || p.category === selectedCategory) &&
       p.title.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -88,22 +387,21 @@ export default function ProductsPage() {
       {/* HERO */}
       <motion.section
         style={{ y: heroY, opacity: heroOpacity }}
-        className="relative py-28 text-center overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-cyan-500"
+        className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white py-24"
       >
-        {/* FLOATING ORBS */}
         <div className="absolute inset-0">
           <div className="absolute top-10 left-20 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-10 w-96 h-96 bg-cyan-300/20 rounded-full blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight"
           >
-            SourceX Components
+            Our Products
           </motion.h1>
 
           <motion.p
@@ -117,38 +415,6 @@ export default function ProductsPage() {
           </motion.p>
         </div>
       </motion.section>
-
-      {/* MOBILE FILTER */}
-      <div className="md:hidden px-6 mt-8">
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="flex items-center gap-2 bg-white px-4 py-3 rounded-xl shadow border"
-        >
-          <Filter size={16} />
-          Filter Categories
-        </button>
-
-        {showFilters && (
-          <div className="mt-3 bg-white p-4 rounded-xl shadow border">
-            {categories.map((cat, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setSelectedCategory(cat);
-                  setShowFilters(false);
-                }}
-                className={`block w-full text-left px-3 py-2 rounded-lg mb-2 transition ${
-                  selectedCategory === cat
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
-                    : "hover:bg-gray-100"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
 
       {/* MAIN */}
       <section className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-8">
@@ -192,20 +458,12 @@ export default function ProductsPage() {
               return (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
                   whileHover={{ y: -10, scale: 1.02 }}
-                  transition={{ duration: 0.4 }}
-                  viewport={{ once: true }}
                   className="bg-white/80 backdrop-blur-xl p-6 rounded-3xl shadow-lg border border-white/70 hover:shadow-2xl transition-all"
                 >
                   <div className="flex justify-between mb-4">
                     <Icon className="text-blue-500" size={28} />
-                    <span
-                      className={`text-xs px-3 py-1 rounded-full ${getTypeColor(
-                        product.type
-                      )}`}
-                    >
+                    <span className={`text-xs px-3 py-1 rounded-full ${getTypeColor(product.type)}`}>
                       {product.type}
                     </span>
                   </div>
@@ -233,9 +491,13 @@ export default function ProductsPage() {
                     {product.stock}
                   </div>
 
-                  <div className="text-blue-600 flex items-center gap-2 text-sm font-medium">
+                  {/* 🔥 CLICK HANDLER */}
+                  <button
+                    onClick={() => setSelectedProduct(product)}
+                    className="text-blue-600 flex items-center gap-2 text-sm font-medium"
+                  >
                     View Specs <ArrowRight size={14} />
-                  </div>
+                  </button>
                 </motion.div>
               );
             })}
@@ -243,13 +505,55 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      {/* 🔥 MODAL */}
+      <AnimatePresence>
+        {selectedProduct && (
+          <motion.div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProduct(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0, y: 40 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl relative"
+            >
+              {/* CLOSE */}
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-black"
+              >
+                <X />
+              </button>
+
+              <h2 className="text-2xl font-bold mb-4">
+                {selectedProduct.title}
+              </h2>
+
+              {/* IMAGE */}
+              <div className="w-full h-40 bg-gray-100 rounded-xl mb-4 flex items-center justify-center text-gray-400">
+                Component Image
+              </div>
+
+              {/* SPECS */}
+              <ul className="space-y-2 text-sm text-gray-700">
+                {selectedProduct.specs?.map((spec: string, i: number) => (
+                  <li key={i}>• {spec}</li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* CTA */}
-      <section className="py-24 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold mb-6"
-        >
+      <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white py-24 text-center">
+        <motion.h2 className="text-4xl font-bold mb-6">
           Need Bulk Components?
         </motion.h2>
 
