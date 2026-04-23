@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Cpu,
@@ -8,7 +9,9 @@ import {
   ShieldCheck,
   Settings,
   Truck,
+  Search,
   ArrowRight,
+  Star,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,123 +19,191 @@ import { useRouter } from "next/navigation";
 const products = [
   {
     title: "Electronic Components",
-    description: "Premium semiconductors, connectors, ICs, relays, and precision passive components engineered for demanding industrial environments.",
+    category: "Components",
+    description: "ICs, semiconductors, connectors.",
+    stock: "In Stock",
+    rating: 4.8,
     icon: Cpu,
   },
   {
-    title: "PCB Fabrication & Assembly",
-    description: "High-reliability PCB manufacturing and turnkey assembly with stringent quality control and full traceability.",
+    title: "PCB Fabrication",
+    category: "Manufacturing",
+    description: "PCB design and assembly.",
+    stock: "Limited",
+    rating: 4.6,
     icon: CircuitBoard,
   },
   {
     title: "Industrial Automation",
-    description: "Advanced control systems, sensors, PLCs, and smart automation solutions for maximum efficiency and uptime.",
+    category: "Automation",
+    description: "PLCs, sensors, control systems.",
+    stock: "In Stock",
+    rating: 4.7,
     icon: Factory,
   },
   {
-    title: "Safety & Protection Systems",
-    description: "Industrial-grade safety equipment, surge protection, and environmental monitoring for secure operations.",
+    title: "Safety Systems",
+    category: "Security",
+    description: "Monitoring and protection systems.",
+    stock: "Low Stock",
+    rating: 4.5,
     icon: ShieldCheck,
   },
   {
-    title: "Custom Engineering Solutions",
-    description: "Bespoke product development, value engineering, and specialized sourcing tailored to your requirements.",
+    title: "Custom Engineering",
+    category: "Engineering",
+    description: "Tailored solutions for clients.",
+    stock: "On Demand",
+    rating: 4.9,
     icon: Settings,
   },
   {
-    title: "Supply Chain & Logistics",
-    description: "End-to-end procurement, strategic inventory management, and reliable global logistics support.",
+    title: "Logistics",
+    category: "Supply",
+    description: "Procurement and delivery systems.",
+    stock: "Available",
+    rating: 4.4,
     icon: Truck,
   },
 ];
 
 export default function ProductsPage() {
   const router = useRouter();
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const goToForm = () => {
     router.push("/#inquiry-form");
   };
 
+  const categories = ["All", ...new Set(products.map(p => p.category))];
+
+  const filteredProducts = products.filter((p) => {
+    return (
+      (selectedCategory === "All" || p.category === selectedCategory) &&
+      p.title.toLowerCase().includes(search.toLowerCase())
+    );
+  });
+
   return (
-    <div className="min-h-screen bg-white text-zinc-900 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#0b1220] to-black text-white">
 
-      {/* HERO SECTION */}
-      <section className="relative bg-[#0A1428] text-white py-32 md:py-44 min-h-[90vh] flex items-center">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-6xl md:text-7xl font-semibold mb-6">
-            Precision Components.<br />
-            <span className="text-blue-300">Engineered for Excellence</span>
-          </h1>
+      {/* HERO */}
+      <section className="py-20 text-center relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 blur-3xl" />
+        
+        <h1 className="text-5xl md:text-6xl font-bold mb-4 relative z-10">
+          Product Catalog
+        </h1>
+        <p className="text-gray-300 relative z-10">
+          Explore high-performance engineering products with real-time availability
+        </p>
+      </section>
 
-          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mb-12">
-            Delivering high-performance electronic and engineering solutions with reliability.
-          </p>
+      {/* MAIN */}
+      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
 
-          <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <Link
-              href="#products"
-              className="bg-white text-[#0A1428] px-10 py-5 rounded-2xl font-semibold"
-            >
-              Explore Portfolio
-            </Link>
+        {/* SIDEBAR */}
+        <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10">
+          <h3 className="font-semibold mb-4 text-lg">Categories</h3>
 
-            {/* ✅ UPDATED BUTTON */}
-            <motion.button
-              onClick={goToForm}
-              whileHover={{ scale: 1.05 }}
-              className="border-2 border-white px-10 py-5 rounded-2xl font-semibold"
-            >
-              Request Consultation
-            </motion.button>
+          <div className="flex flex-col gap-2">
+            {categories.map((cat, i) => (
+              <button
+                key={i}
+                onClick={() => setSelectedCategory(cat)}
+                className={`text-left px-3 py-2 rounded-lg transition ${
+                  selectedCategory === cat
+                    ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white"
+                    : "hover:bg-white/10"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
-      </section>
 
-      {/* PRODUCTS */}
-      <section id="products" className="py-28">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => {
-            const Icon = product.icon;
-            return (
-              <motion.div key={index} className="p-8 border rounded-2xl shadow">
-                <Icon size={40} className="mb-4 text-blue-600" />
-                <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
-                <p className="text-gray-600">{product.description}</p>
-              </motion.div>
-            );
-          })}
+        {/* PRODUCTS */}
+        <div className="md:col-span-3">
+
+          {/* SEARCH */}
+          <div className="flex items-center bg-white/10 backdrop-blur-xl rounded-xl px-4 py-3 border border-white/10 mb-6">
+            <Search className="text-gray-400 mr-2" />
+            <input
+              type="text"
+              placeholder="Search components, ICs, sensors..."
+              className="w-full bg-transparent outline-none text-white placeholder-gray-400"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+
+          {/* GRID */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product, index) => {
+              const Icon = product.icon;
+
+              return (
+                <motion.div
+                  key={index}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xl hover:border-blue-400/40 transition cursor-pointer group"
+                >
+                  {/* TOP */}
+                  <div className="flex justify-between items-center mb-4">
+                    <Icon size={35} className="text-blue-400" />
+
+                    <span className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400">
+                      {product.stock}
+                    </span>
+                  </div>
+
+                  {/* TITLE */}
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-blue-400 transition">
+                    {product.title}
+                  </h3>
+
+                  {/* DESC */}
+                  <p className="text-sm text-gray-300 mb-3">
+                    {product.description}
+                  </p>
+
+                  {/* RATING */}
+                  <div className="flex items-center gap-1 text-yellow-400 mb-3">
+                    <Star size={14} fill="currentColor" />
+                    <span className="text-sm">{product.rating}</span>
+                  </div>
+
+                  {/* CATEGORY */}
+                  <span className="text-xs text-purple-300 bg-purple-500/20 px-2 py-1 rounded">
+                    {product.category}
+                  </span>
+
+                  {/* ACTION */}
+                  <div className="flex items-center gap-2 mt-4 text-blue-400">
+                    View Details <ArrowRight size={16} />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* FINAL CTA */}
-      <section className="py-28 text-center">
-        <h2 className="text-4xl font-semibold mb-6">
-          Ready to Source Smarter?
+      {/* CTA */}
+      <section className="py-20 text-center">
+        <h2 className="text-3xl font-semibold mb-4">
+          Need Custom Components?
         </h2>
 
-        <p className="text-lg text-gray-600 mb-10">
-          Connect with our experts and get your custom BOM quote.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-5 justify-center">
-          
-          {/* ✅ MAIN FIXED BUTTON */}
-          <motion.button
-            onClick={goToForm}
-            whileHover={{ scale: 1.05 }}
-            className="bg-[#0A1428] text-white px-12 py-5 rounded-2xl font-semibold flex items-center gap-3"
-          >
-            Request a Custom Quote
-            <ArrowRight />
-          </motion.button>
-
-          <Link
-            href="tel:+919876543210"
-            className="border-2 border-[#0A1428] px-12 py-5 rounded-2xl font-semibold"
-          >
-            Schedule a Call
-          </Link>
-        </div>
+        <motion.button
+          onClick={goToForm}
+          whileHover={{ scale: 1.08 }}
+          className="bg-gradient-to-r from-blue-500 to-purple-500 px-10 py-4 rounded-xl font-semibold shadow-lg"
+        >
+          Request Quote
+        </motion.button>
       </section>
     </div>
   );
