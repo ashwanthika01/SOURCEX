@@ -50,13 +50,17 @@ export default function CTAFooter() {
           bg-white/10 backdrop-blur-2xl border border-white/30 
           rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/30"
         >
-          <form className="space-y-6 text-left">
+          <form 
+          action="https://formspree.io/f/mwvaadde"
+          method="POST"
+          className="space-y-6 text-left">
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
                 <label className="block text-sm font-medium text-blue-100 mb-1.5">
                   Full Name *
                 </label>
                 <input
+                  name = "name"
                   type="text"
                   required
                   className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
@@ -70,6 +74,7 @@ export default function CTAFooter() {
                   Company
                 </label>
                 <input
+                  name = "company"
                   type="text"
                   className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
                   focus:border-white focus:ring-2 focus:ring-white/50 text-gray-900 
@@ -85,6 +90,7 @@ export default function CTAFooter() {
                   Work Email *
                 </label>
                 <input
+                  name = "email"
                   type="email"
                   required
                   className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
@@ -98,6 +104,7 @@ export default function CTAFooter() {
                   Phone (optional)
                 </label>
                 <input
+                  name = "phone"
                   type="tel"
                   className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
                   focus:border-white focus:ring-2 focus:ring-white/50 text-gray-900 
@@ -112,6 +119,7 @@ export default function CTAFooter() {
                 Tell us about your project *
               </label>
               <textarea
+                name = "project"
                 rows={5}
                 required
                 className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 

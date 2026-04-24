@@ -205,15 +205,20 @@ export default function NContactPage() {
                 </div>
               </div>
 
-              <form className="space-y-5">
+              <form 
+              action="https://formspree.io/f/mvzddjee"
+              method="POST"
+              className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-4">
                   <input
+                  name = "name"
                     type="text"
                     className={inputClass}
                     placeholder="Full Name *"
                     required
                   />
                   <input
+                  name = "email"
                     type="email"
                     className={inputClass}
                     placeholder="Email Address *"
@@ -222,12 +227,14 @@ export default function NContactPage() {
                 </div>
 
                 <input
+                  name = "subject"
                   type="text"
                   className={inputClass}
                   placeholder="Subject / Requirement"
                 />
 
                 <textarea
+                  name = "message"
                   className={`${inputClass} resize-none min-h-[140px]`}
                   placeholder="Tell us more about your project, requirements, or how we can help you..."
                   rows={5}
