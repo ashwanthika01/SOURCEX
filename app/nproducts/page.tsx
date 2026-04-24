@@ -58,7 +58,7 @@ const products = [
   "Fast Switching",
   "Package: TO-220 / SMD"
 ],
-    image: "/components/mosfet.png"
+    image: "/components/mosfet.jpg"
   },
 
   {
@@ -77,7 +77,7 @@ const products = [
   "Thermal Protection",
   "Low Noise Output"
 ],
-    image: "/components/regulator.png"
+    image: "/components/regulator.webp"
   },
 
   {
@@ -96,7 +96,7 @@ const products = [
       "ESD Protection: IEC compliant",
       "Package: SMB / DO-214"
     ],
-    image: "/components/tvs-diode.png"
+    image: "/components/tvs-diode.jpg"
   },
 
   {
@@ -114,7 +114,7 @@ const products = [
       "Low leakage current",
       "Package: DO-41 / SMD"
     ],
-    image: "/components/zener-diode.png"
+    image: "/components/zener.jpg"
   },
 
   {
@@ -132,7 +132,7 @@ const products = [
       "Surge Current: up to 200A",
       "Package: DO-41"
     ],
-    image: "/components/rectifier-diode.png"
+    image: "/components/rectifier-diode.webp"
   },
 
   {
@@ -151,7 +151,7 @@ const products = [
       "Package: TO-92",
       "Operating Temp: -55°C to +150°C"
     ],
-    image: "/components/pnp-transistor.png"
+    image: "/components/pnp-transistor.avif"
   },
 
   {
@@ -170,7 +170,7 @@ const products = [
       "Lifetime: 2000+ hrs",
       "Package: Radial / SMD"
     ],
-    image: "/components/electrolytic-capacitor.png"
+    image: "/components/electrolytic-capacitor.jpg"
   },
 
   {
@@ -188,7 +188,7 @@ const products = [
       "High stability",
       "Package: 0603 / 0805"
     ],
-    image: "/components/precision-resistor.png"
+    image: "/components/precision-resistor.jpg"
   },
 
   {
@@ -225,7 +225,7 @@ const products = [
       "Shielded design",
       "Package: SMD"
     ],
-    image: "/components/power-inductor.png"
+    image: "/components/power-inductor.webp"
   },
 
   {
@@ -243,7 +243,7 @@ const products = [
       "Ultra-fast switching",
       "Package: SMA / SMB"
     ],
-    image: "/components/schottky-diode.png"
+    image: "/components/schottky-diode.webp"
   },
 
   {
@@ -261,7 +261,7 @@ const products = [
       "PD Support",
       "Durability: 10,000 cycles"
     ],
-    image: "/components/usb-port.png"
+    image: "/components/usb-port.avif"
   },
 
   {
@@ -279,7 +279,7 @@ const products = [
       "Short circuit protection",
       "Package: SMD"
     ],
-    image: "/components/ptc-fuse.png"
+    image: "/components/ptc-fuse.jpg"
   },
 
   {
@@ -297,7 +297,7 @@ const products = [
       "High-frequency performance",
       "Package: 0402 / 0603"
     ],
-    image: "/components/ceramic-capacitor.png"
+    image: "/components/ceramic-capacitor.webp"
   },
 
   {
@@ -315,7 +315,7 @@ const products = [
       "High stability",
       "Package: 0603 / 0805"
     ],
-    image: "/components/feedback-resistor.png"
+    image: "/components/feedback-resistor.jpg"
   },
 
   {
@@ -333,7 +333,7 @@ const products = [
       "Low leakage",
       "Package: DO-41 / SMD"
     ],
-    image: "/components/general-protection-diode.png"
+    image: "/components/general-protection.webp"
   }
 ];
 
@@ -536,9 +536,11 @@ export default function ProductsPage() {
               </h2>
 
               {/* IMAGE */}
-              <div className="w-full h-40 bg-gray-100 rounded-xl mb-4 flex items-center justify-center text-gray-400">
-                Component Image
-              </div>
+              <img
+              src={selectedProduct.image}
+              alt={selectedProduct.title}
+              className="w-full h-40 object-contain rounded-xl mb-4 bg-gray-100"
+              />
 
               {/* SPECS */}
               <ul className="space-y-2 text-sm text-gray-700">

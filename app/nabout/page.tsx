@@ -6,7 +6,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import {
   ShieldCheck,
   Lightbulb,
@@ -72,7 +72,7 @@ const coreValues = [
 ];
 
 /* ---------------- 3D CARD ---------------- */
-function TiltCard({ children }) {
+function TiltCard({ children }: { children: ReactNode }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -94,7 +94,7 @@ function TiltCard({ children }) {
       whileHover={{ scale: 1.05 }}
       className="group relative p-8 rounded-3xl bg-white border shadow-xl transition overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/0 via-blue-200/40 to-indigo-100/0 opacity-0 group-hover:opacity-100 transition blur-xl" />
+      <div className="absolute inset-0 bg-[conic-gradient(at_top,_#0f172a,_#1e3a8a,_#1e293b,_#0f172a)] opacity-30 animate-[spin_40s_linear_infinite]" />
       {children}
     </motion.div>
   );
@@ -124,7 +124,7 @@ export default function AboutPage() {
   const smoothY = useSpring(mouseY, { damping: 30 });
 
   useEffect(() => {
-    const move = (e) => {
+    const move = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
@@ -149,8 +149,8 @@ export default function AboutPage() {
       />
 
       {/* HERO */}
-      <section className="relative pt-24 pb-16 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-[conic-gradient(at_top,_#e0f2fe,_#eef2ff,_#f0f9ff,_#e0f2fe)] opacity-60 animate-[spin_30s_linear_infinite]" />
+      <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white py-24 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-[conic-gradient(at_top,_#e0f2fe,_#eef2ff,_#f0f9ff,_#e0f2fe)] opacity-5 animate-[spin_30s_linear_infinite]" />
 
         <motion.div
           variants={stagger}
@@ -158,7 +158,7 @@ export default function AboutPage() {
           animate="show"
           className="relative z-10 max-w-5xl mx-auto px-6"
         >
-          <motion.span className="px-6 py-2 border rounded-full bg-white/60 text-blue-600 text-sm">
+          <motion.span className="px-6 py-2 border border-white/20 rounded-full bg-white/10 text-blue-200 text-sm">
             ABOUT SOURCEX
           </motion.span>
 
@@ -176,27 +176,25 @@ export default function AboutPage() {
             ))}
           </h1>
 
-          <p className="mt-6 text-zinc-600 max-w-xl mx-auto">
+          <p className="mt-6 text-blue-200 max-w-xl mx-auto">
             We combine innovation, sourcing expertise, and reliability to help businesses scale faster.
           </p>
 
           <motion.button
             whileHover={{ scale: 1.1 }}
             onClick={() => router.push("/#inquiry-form")}
-            className="mt-8 px-8 py-3 bg-blue-600 text-white rounded-xl"
+            className="mt-8 px-8 py-3 bg-white text-blue-600 rounded-xl"
           >
             Get Started <ArrowRight className="inline ml-2" />
           </motion.button>
 
-          <div className="w-20 h-1 bg-blue-600 mx-auto mt-10 rounded-full"></div>
+          <div className="w-20 h-1 bg-blue-400 mx-auto mt-10 rounded-full"></div>
         </motion.div>
       </section>
 
-      {/* ================= WHAT WE OFFER (ADDED) ================= */}
+      {/* WHAT WE OFFER */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
-
-          {/* LEFT IMAGE */}
           <motion.div
             initial={{ opacity: 0, scale: 1.1 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -204,14 +202,13 @@ export default function AboutPage() {
             className="relative h-[400px] lg:h-auto"
           >
             <img
-              src="https://images.unsplash.com/photo-1581093588401-22c5e8c0a6f9"
+              src="/about.webp"
               alt="tech"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/10" />
           </motion.div>
 
-          {/* RIGHT CONTENT */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -230,12 +227,8 @@ export default function AboutPage() {
                 "End-to-end sourcing & integration",
                 "Global delivery with seamless logistics",
               ].map((item, i) => (
-                <motion.li
-                  key={i}
-                  variants={fadeUp}
-                  className="flex items-start gap-3 group"
-                >
-                  <span className="mt-2 w-2 h-2 bg-blue-500 rounded-full group-hover:scale-125 transition" />
+                <motion.li key={i} variants={fadeUp} className="flex items-start gap-3">
+                  <span className="mt-2 w-2 h-2 bg-blue-500 rounded-full" />
                   {item}
                 </motion.li>
               ))}
@@ -244,7 +237,6 @@ export default function AboutPage() {
             <motion.button
               variants={fadeUp}
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               onClick={() => router.push("/#inquiry-form")}
               className="mt-8 w-fit px-6 py-3 bg-white text-black rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-500 hover:text-white transition"
             >
@@ -255,27 +247,43 @@ export default function AboutPage() {
       </section>
 
       {/* CORE VALUES */}
-      <section className="py-20 px-6 mt-10">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-          {coreValues.map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <TiltCard key={i}>
-                <Icon className="text-blue-600 mb-6" size={40} />
-                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-                <ul className="text-zinc-500 space-y-2 text-left">
-                  {item.points.map((point, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <span className="text-blue-600 mt-1">•</span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </TiltCard>
-            );
-          })}
-        </div>
-      </section>
+      {/* CORE VALUES */}
+<section className="py-20 px-6 mt-10">
+  <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+    {coreValues.map((item, i) => {
+      const Icon = item.icon;
+      return (
+        <motion.div
+          key={i}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          whileHover={{ y: -8, scale: 1.02 }}
+          transition={{ duration: 0.4 }}
+          className="group relative p-8 rounded-3xl bg-white border shadow-md hover:shadow-xl transition-all"
+        >
+          {/* subtle hover glow */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/0 via-blue-200/40 to-indigo-100/0 opacity-0 group-hover:opacity-100 transition blur-xl rounded-3xl" />
+
+          <Icon className="text-blue-600 mb-6 relative z-10" size={40} />
+
+          <h3 className="text-2xl font-bold mb-4 relative z-10">
+            {item.title}
+          </h3>
+
+          <ul className="text-zinc-500 space-y-2 text-left relative z-10">
+            {item.points.map((point, index) => (
+              <li key={index} className="flex items-start gap-2">
+                <span className="text-blue-600 mt-1">•</span>
+                {point}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      );
+    })}
+  </div>
+</section>
 
       {/* FEATURES */}
       <section className="py-20 px-6 bg-zinc-50">
@@ -311,8 +319,8 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-blue-600 text-white text-center">
+      {/* CTA (UPDATED GRADIENT) */}
+      <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white py-24 text-center">
         <h2 className="text-4xl font-bold mb-6">Let’s Build Together</h2>
 
         <motion.button
