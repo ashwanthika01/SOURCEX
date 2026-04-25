@@ -439,6 +439,16 @@ export default function ProductsPage() {
 
         {/* PRODUCTS */}
         <div className="md:col-span-3">
+          {/* MOBILE FILTER BUTTON */}
+<div className="md:hidden mb-4">
+  <button
+    onClick={() => setShowFilters(true)}
+    className="flex items-center gap-2 bg-white/80 backdrop-blur-xl px-4 py-3 rounded-xl shadow border w-full justify-center"
+  >
+    <Filter size={18} />
+    Filters
+  </button>
+</div>
           {/* SEARCH */}
           <div className="flex items-center bg-white/80 backdrop-blur-xl px-4 py-4 rounded-2xl shadow border mb-10">
             <Search className="text-gray-400 mr-2" />
@@ -552,7 +562,56 @@ export default function ProductsPage() {
           </motion.div>
         )}
       </AnimatePresence>
+{/* 🔥 MOBILE FILTER MODAL */}
+<AnimatePresence>
+  {showFilters && (
+    <motion.div
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setShowFilters(false)}
+    >
+      {/* SHEET */}
+      <motion.div
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "100%" }}
+        transition={{ type: "spring", damping: 25 }}
+        onClick={(e) => e.stopPropagation()}
+        className="w-full bg-white/90 backdrop-blur-2xl rounded-t-3xl p-6 shadow-2xl"
+      >
+        {/* HEADER */}
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-semibold">Filter Categories</h3>
+          <button onClick={() => setShowFilters(false)}>
+            <X />
+          </button>
+        </div>
 
+        {/* CATEGORY PILLS */}
+        <div className="flex flex-wrap gap-3">
+          {categories.map((cat, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                setSelectedCategory(cat);
+                setShowFilters(false); // close after select
+              }}
+              className={`px-4 py-2 rounded-full text-sm transition ${
+                selectedCategory === cat
+                  ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
+                  : "bg-gray-100"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
       {/* CTA */}
       <section className="relative bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white py-24 text-center">
         <motion.h2 className="text-4xl font-bold mb-6">
