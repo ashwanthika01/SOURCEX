@@ -237,7 +237,7 @@ export default function About() {
               <h4 className="text-2xl font-bold text-center text-sky-700 mb-8">Active Components</h4>
               <div className="grid grid-cols-4 gap-6">
                 {[
-                  { name: "Avago", file: "AVAGO.jpg" },
+                  { name: "Avago", file: "avago.jpg" },
                   { name: "Onsemi", file: "onsemi.jpg" },
                   { name: "Renesas", file: "renesas.jpg" },
                   { name: "Texas", file: "texas.jpg" },
