@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ArrowRight, X, ChevronDown } from "lucide-react";
 
 const categories = [
@@ -64,6 +65,7 @@ const products = [
   },
 ];
 
+
 export default function CategorySection() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -76,7 +78,25 @@ export default function CategorySection() {
   // ================== FORMSPREE CONFIGURATION ==================
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojraoqw"; 
   // ============================================================
+ const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
+  const scroll = (dir: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const scrollAmount = 300;
+    scrollRef.current.scrollBy({
+      left: dir === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const scrollLeft = scrollRef.current.scrollLeft;
+    const cardWidth = 300; // approx width
+    const index = Math.round(scrollLeft / cardWidth);
+    setActiveIndex(index);
+  };
   const filteredProducts = 
     activeCategory === "All" 
       ? products 
@@ -206,7 +226,11 @@ export default function CategorySection() {
 
         {/* Products - Horizontal Scroll on Mobile, Grid on Desktop */}
         <div className="relative">
-          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0">
+          <div 
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0"
+          >
             {filteredProducts.map((product, index) => (
               <div
                 key={index}
@@ -257,6 +281,17 @@ export default function CategorySection() {
           </div>
         </div>
 
+{/* DOT INDICATORS (mobile only) */}
+<div className="md:hidden flex justify-center gap-2 mt-2">
+  {filteredProducts.map((_, i) => (
+    <div
+      key={i}
+      className={`h-1.5 w-1.5 rounded-full transition-all ${
+        i === activeIndex ? "bg-gray-800 w-3" : "bg-gray-300"
+      }`}
+    />
+  ))}
+</div>
         {/* View All Button */}
         <div className="flex justify-center mt-12">
           <a

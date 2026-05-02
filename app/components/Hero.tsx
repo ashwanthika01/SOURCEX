@@ -392,21 +392,27 @@ export default function Hero() {
 
             {/* ── SEARCH INPUT ── */}
             <div className="relative flex-1">
-              <div className="flex items-center bg-white overflow-hidden">
+              <div className="flex items-center bg-white border border-gray-200 rounded-2xl overflow-hidden focus-within:border-blue-200 transition-all">
                 <input
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search components, part numbers..."
-                  className="flex-1 px-4 py-2 text-black text-sm outline-none placeholder:text-gray-400"
+                  className="flex-1 px-4 py-3 text-black text-sm outline-none placeholder:text-gray-400 bg-transparent"
                 />
+
                 {search && (
-                  <button onClick={() => setSearch("")} className="px-2 text-gray-400 hover:text-gray-600">
+                  <button
+                    onClick={() => setSearch("")}
+                    className="px-2 text-gray-400 hover:text-gray-600"
+                  >
                     <X className="w-4 h-4" />
                   </button>
                 )}
-                <button className="px-3 sm:px-4 bg-blue-600 hover:bg-blue-500 h-full py-2 transition">
-                  <Search className="text-white w-4 h-4" />
+
+                {/* Transparent Glossy Search Button */}
+                <button className="px-4 py-3 bg-white/70 backdrop-blur-md hover:bg-white/90 border-l border-gray-100 text-gray-500 hover:text-gray-700 transition-all flex items-center justify-center">
+                  <Search className="w-4 h-4" />
                 </button>
               </div>
 
@@ -423,7 +429,7 @@ export default function Hero() {
                   >
                     {searchResults.length === 0 ? (
                       <div className="px-5 py-8 text-center text-white/40 text-sm">
-                        No components found for "{search}"
+                        No components found for &quot;{search}&quot;
                       </div>
                     ) : (
                       <>
@@ -438,7 +444,6 @@ export default function Hero() {
                         </div>
 
                         {searchResults.map((product, i) => {
-                          const Icon = product.icon;
                           return (
                             <motion.button
                               key={i}

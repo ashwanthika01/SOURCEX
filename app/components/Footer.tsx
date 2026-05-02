@@ -9,7 +9,7 @@ export default function CTAFooter() {
     <div className="w-full">
 
       {/* ================= CTA SECTION ================= */}
-      <section id= "contact-form"
+      <section id="contact-form"
       className="relative bg-[#0c1220] overflow-hidden">
 
         {/* Subtle noise texture overlay */}
@@ -174,8 +174,8 @@ export default function CTAFooter() {
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
         {/* Main footer grid */}
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 py-12 sm:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-12">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 py-10 sm:py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 sm:gap-10 md:gap-12">
 
             {/* Brand block */}
             <div className="sm:col-span-2 md:col-span-4">

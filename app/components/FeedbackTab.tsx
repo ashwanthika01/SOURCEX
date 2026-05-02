@@ -17,7 +17,6 @@ export default function FeedbackTab() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Lock body scroll when panel is open on mobile
   useEffect(() => {
     if (open) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
@@ -93,20 +92,20 @@ export default function FeedbackTab() {
 
   return (
     <>
-      {/* ── FEEDBACK TAB BUTTON ── */}
+      {/* FEEDBACK TAB BUTTON */}
       <div className="fixed right-0 top-3/4 -translate-y-1/2 z-50">
         <motion.button
           whileHover={{ x: -2 }}
           onClick={() => setOpen(true)}
-          className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium
+          className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold
           px-3 py-4 rounded-l-md transition shadow-lg
           [writing-mode:vertical-rl] rotate-180 tracking-wide"
         >
-          Give Feedback
+          Give a Feedback
         </motion.button>
       </div>
 
-      {/* ── BACKDROP ── */}
+      {/* BACKDROP */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -120,7 +119,7 @@ export default function FeedbackTab() {
         )}
       </AnimatePresence>
 
-      {/* ── SLIDE-IN PANEL ── */}
+      {/* PANEL */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -136,12 +135,14 @@ export default function FeedbackTab() {
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.08]">
               <div>
-                <h2 className="text-white font-semibold text-base">Share your feedback</h2>
-                <p className="text-white/40 text-xs mt-0.5">Help us improve SourceX</p>
+                <h2 className="text-white font-bold text-base">Share your feedback</h2>
+                <p className="text-white/60 text-xs mt-0.5 font-medium">
+                  Help us improve SourceX
+                </p>
               </div>
               <button
                 onClick={handleClose}
-                className="text-white/40 hover:text-white transition p-1"
+                className="text-white/50 hover:text-white transition p-1"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -151,7 +152,6 @@ export default function FeedbackTab() {
             <div className="flex-1 overflow-y-auto px-6 py-6">
               <AnimatePresence mode="wait">
 
-                {/* ── SUCCESS STATE ── */}
                 {submitted ? (
                   <motion.div
                     key="success"
@@ -160,21 +160,15 @@ export default function FeedbackTab() {
                     exit={{ opacity: 0 }}
                     className="flex flex-col items-center justify-center h-full text-center py-16"
                   >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", delay: 0.1 }}
-                    >
-                      <CheckCircle className="w-16 h-16 text-blue-400 mx-auto mb-5" />
-                    </motion.div>
-                    <h3 className="text-white text-xl font-semibold mb-2">Thank you!</h3>
-                    <p className="text-white/50 text-sm max-w-xs">
-                      Your feedback has been sent to the SourceX team. We appreciate you taking the time.
+                    <CheckCircle className="w-16 h-16 text-blue-400 mx-auto mb-5" />
+                    <h3 className="text-white text-xl font-bold mb-2">Thank you!</h3>
+                    <p className="text-white/70 text-sm max-w-xs font-medium">
+                      Your feedback has been sent to the SourceX team.
                     </p>
                     <button
                       onClick={handleClose}
                       className="mt-8 px-6 py-2.5 bg-blue-600 hover:bg-blue-500
-                      text-white text-sm rounded transition"
+                      text-white text-sm font-semibold rounded transition"
                     >
                       Close
                     </button>
@@ -182,7 +176,6 @@ export default function FeedbackTab() {
 
                 ) : (
 
-                  /* ── FORM ── */
                   <motion.form
                     key="form"
                     initial={{ opacity: 0 }}
@@ -192,9 +185,9 @@ export default function FeedbackTab() {
                     className="space-y-6"
                   >
 
-                    {/* Star Rating */}
+                    {/* Rating */}
                     <div>
-                      <label className="text-[11px] text-white/40 uppercase tracking-widest block mb-3">
+                      <label className="text-[11px] text-white/70 font-semibold uppercase tracking-widest block mb-3">
                         Overall Rating *
                       </label>
                       <div className="flex items-center gap-2">
@@ -205,19 +198,18 @@ export default function FeedbackTab() {
                             onClick={() => setRating(star)}
                             onMouseEnter={() => setHoverRating(star)}
                             onMouseLeave={() => setHoverRating(0)}
-                            className="transition-transform hover:scale-110 focus:outline-none"
                           >
                             <Star
-                              className={`w-8 h-8 transition-colors ${
+                              className={`w-8 h-8 ${
                                 star <= activeRating
                                   ? "text-yellow-400 fill-yellow-400"
-                                  : "text-white/20"
+                                  : "text-white/30"
                               }`}
                             />
                           </button>
                         ))}
                         {activeRating > 0 && (
-                          <span className="text-white/50 text-sm ml-1">
+                          <span className="text-white/80 text-sm font-semibold ml-1">
                             {ratingLabels[activeRating]}
                           </span>
                         )}
@@ -226,7 +218,7 @@ export default function FeedbackTab() {
 
                     {/* Category */}
                     <div>
-                      <label className="text-[11px] text-white/40 uppercase tracking-widest block mb-3">
+                      <label className="text-[11px] text-white/70 font-semibold uppercase tracking-widest block mb-3">
                         Feedback Category *
                       </label>
                       <div className="flex flex-wrap gap-2">
@@ -235,10 +227,10 @@ export default function FeedbackTab() {
                             key={cat}
                             type="button"
                             onClick={() => setCategory(cat)}
-                            className={`px-3 py-1.5 text-xs border transition ${
+                            className={`px-3 py-1.5 text-xs font-semibold border ${
                               category === cat
                                 ? "bg-blue-600 border-blue-600 text-white"
-                                : "border-white/10 text-white/50 hover:border-white/30 hover:text-white/80"
+                                : "border-white/20 text-white/70 hover:text-white"
                             }`}
                           >
                             {cat}
@@ -249,82 +241,52 @@ export default function FeedbackTab() {
 
                     {/* Message */}
                     <div>
-                      <label className="text-[11px] text-white/40 uppercase tracking-widest block mb-2">
+                      <label className="text-[11px] text-white/70 font-semibold uppercase tracking-widest block mb-2">
                         Your Feedback *
                       </label>
                       <textarea
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         rows={4}
-                        placeholder="Tell us what you think — what's working well, what could be better..."
-                        className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08]
-                        text-white text-sm placeholder:text-white/20
-                        focus:border-blue-500/60 focus:bg-white/[0.06] focus:outline-none
-                        transition-all resize-none"
+                        placeholder="Tell us what you think..."
+                        className="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.12]
+                        text-white text-sm font-medium placeholder:text-white/40
+                        focus:border-blue-500/70 focus:outline-none"
                       />
-                      <div className="flex justify-end mt-1">
-                        <span className={`text-xs ${message.length > 500 ? "text-red-400" : "text-white/20"}`}>
-                          {message.length}/500
-                        </span>
-                      </div>
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label className="text-[11px] text-white/40 uppercase tracking-widest block mb-2">
-                        Email{" "}
-                        <span className="normal-case text-white/25">(For follow-up)</span>
+                      <label className="text-[11px] text-white/70 font-semibold uppercase tracking-widest block mb-2">
+                        Email <span className="normal-case text-white/40">(For follow-up)</span>
                       </label>
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="you@example.com"
-                        className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08]
-                        text-white text-sm placeholder:text-white/20
-                        focus:border-blue-500/60 focus:bg-white/[0.06] focus:outline-none transition-all"
+                        className="w-full px-4 py-3 bg-white/[0.05] border border-white/[0.12]
+                        text-white text-sm font-medium placeholder:text-white/40
+                        focus:border-blue-500/70 focus:outline-none"
                       />
                     </div>
 
-                    {/* Error */}
                     {error && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-red-400 text-xs"
-                      >
+                      <p className="text-red-400 text-xs font-semibold">
                         {error}
-                      </motion.p>
+                      </p>
                     )}
 
-                    {/* Submit */}
                     <motion.button
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.98 }}
                       type="submit"
                       disabled={loading}
-                      className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50
-                      text-white font-semibold text-sm flex items-center justify-center gap-2.5
-                      transition-colors"
+                      className="w-full py-3.5 bg-blue-600 hover:bg-blue-500
+                      text-white font-bold text-sm flex items-center justify-center gap-2.5"
                     >
-                      {loading ? (
-                        <>
-                          <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                            <circle className="opacity-25" cx="12" cy="12" r="10"
-                              stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                          </svg>
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-4 h-4" />
-                          Send Feedback
-                        </>
-                      )}
+                      {loading ? "Sending..." : "Send Feedback"}
                     </motion.button>
 
-                    <p className="text-center text-white/20 text-[11px]">
+                    <p className="text-center text-white/40 text-[11px] font-medium">
                       Feedback is sent directly to the SourceX team.
                     </p>
                   </motion.form>
