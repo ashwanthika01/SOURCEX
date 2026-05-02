@@ -2,213 +2,314 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { ArrowRight, Mail, MapPin, Send } from "lucide-react";
 
 export default function CTAFooter() {
   return (
-    <section
-      className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] 
-      min-h-screen flex flex-col justify-between
-      bg-gradient-to-br from-[#7dd3fc] via-[#60a5fa] to-[#3b82f6]
-      px-6 md:px-12 lg:px-20 py-20 lg:py-28 overflow-hidden"
-    >
-      {/* Soft overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+    <div className="w-full">
 
-      {/* Subtle light glows */}
-      <div
-        className="absolute inset-0 opacity-30 
-        bg-[radial-gradient(circle_at_25%_25%,rgba(255,255,255,0.6),transparent_50%),
-                   radial-gradient(circle_at_75%_70%,rgba(255,255,255,0.5),transparent_50%)]"
-      />
+      {/* ================= CTA SECTION ================= */}
+      <section id= "contact-form"
+      className="relative bg-[#0c1220] overflow-hidden">
 
-      {/* ================= MAIN CONTENT ================= */}
-      <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center text-center text-white">
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          id="inquiry-form"
-          className="max-w-3xl"
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight">
-            Ready to Bring Your Hardware Project to Life?
-          </h2>
+        {/* Subtle noise texture overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            backgroundSize: "128px 128px",
+          }}
+        />
 
-          <p className="mt-6 text-xl text-blue-100 max-w-2xl mx-auto">
-            Share your BOM, schematic, or project brief. Our sourcing experts will 
-            review it and respond with a competitive quote within <span className="font-semibold text-white">24–48 hours</span>.
-          </p>
-        </motion.div>
+        {/* Dim blue glow */}
+        <div className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-blue-700/10 rounded-full blur-[140px] pointer-events-none" />
 
-        {/* Enhanced Glass Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mt-14 w-full max-w-3xl 
-          bg-white/10 backdrop-blur-2xl border border-white/30 
-          rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/30"
-        >
-          <form 
-          action="https://formspree.io/f/mwvaadde"
-          method="POST"
-          className="space-y-6 text-left">
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-medium text-blue-100 mb-1.5">
-                  Full Name *
-                </label>
-                <input
-                  name = "name"
-                  type="text"
-                  required
-                  className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
-                  focus:border-white focus:ring-2 focus:ring-white/50 text-gray-900 
-                  placeholder:text-gray-500 text-base outline-none"
-                  placeholder="Abcd xyz"
-                />
+        <div className="relative max-w-6xl mx-auto px-5 sm:px-8 md:px-12 pt-16 sm:pt-20 md:pt-24 pb-20 sm:pb-24 md:pb-28">
+
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+
+            {/* LEFT */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65 }}
+              viewport={{ once: true }}
+              className="lg:sticky lg:top-24"
+            >
+              <p className="text-blue-400 text-sm font-medium mb-4 tracking-wide">
+                — Get a Quote
+              </p>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] text-white">
+                Let's source the right<br />
+                components for<br />
+                <span className="text-blue-400">your project.</span>
+              </h2>
+
+              <p className="mt-6 text-gray-400 text-[15px] leading-relaxed max-w-sm">
+                Drop us your BOM, schematic, or a quick brief. We'll get back with
+                a competitive quote in{" "}
+                <span className="text-gray-200">24–48 hours</span>, no fluff.
+              </p>
+
+              {/* Stats */}
+              <div className="mt-10 sm:mt-14 space-y-5">
+                {[
+                  { num: "10,000+", label: "Components delivered" },
+                  { num: "500+",    label: "Brands we work with" },
+                  { num: "15+",     label: "Years in the business" },
+                ].map((s, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -16 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.45, delay: i * 0.08 }}
+                    viewport={{ once: true }}
+                    className="flex items-baseline gap-4"
+                  >
+                    <span className="text-2xl sm:text-3xl font-bold text-white tabular-nums">{s.num}</span>
+                    <span className="text-gray-500 text-sm">{s.label}</span>
+                  </motion.div>
+                ))}
               </div>
-              <div>
-                <label className="block text-sm font-medium text-blue-100 mb-1.5">
-                  Company
-                </label>
-                <input
-                  name = "company"
-                  type="text"
-                  className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
-                  focus:border-white focus:ring-2 focus:ring-white/50 text-gray-900 
-                  placeholder:text-gray-500 text-base outline-none"
-                  placeholder="Abcd Electronics"
-                />
-              </div>
-            </div>
+            </motion.div>
 
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-medium text-blue-100 mb-1.5">
-                  Work Email *
-                </label>
-                <input
-                  name = "email"
-                  type="email"
-                  required
-                  className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
-                  focus:border-white focus:ring-2 focus:ring-white/50 text-gray-900 
-                  placeholder:text-gray-500 text-base outline-none"
-                  placeholder="abcd@gmail.com"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-blue-100 mb-1.5">
-                  Phone (optional)
-                </label>
-                <input
-                  name = "phone"
-                  type="tel"
-                  className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
-                  focus:border-white focus:ring-2 focus:ring-white/50 text-gray-900 
-                  placeholder:text-gray-500 text-base outline-none"
-                  placeholder="+91 98765 43210"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-blue-100 mb-1.5">
-                Tell us about your project *
-              </label>
-              <textarea
-                name = "project"
-                rows={5}
-                required
-                className="w-full px-5 py-3.5 bg-white/90 border border-white/40 rounded-2xl 
-                focus:border-white focus:ring-2 focus:ring-white/50 text-gray-900 
-                placeholder:text-gray-500 text-base outline-none resize-y min-h-[120px]"
-                placeholder="We need 5000 units of a custom PCB assembly with specific components from Texas Instruments and Murata. Target cost and timeline..."
-              />
-            </div>
-
-            <div className="flex justify-center pt-4">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="px-10 py-4 bg-white text-[#2563eb] font-semibold text-lg rounded-2xl 
-                hover:bg-blue-50 transition-all shadow-lg flex items-center gap-3 group"
+            {/* RIGHT — form */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              <form
+                action="https://formspree.io/f/mwvaadde"
+                method="POST"
+                className="space-y-5"
               >
-                Get Your Quote Within 48 Hours
-                <span className="group-hover:translate-x-1 transition">→</span>
-              </motion.button>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] text-gray-500 uppercase tracking-widest">Full Name *</label>
+                    <input
+                      name="name" type="text" required
+                      placeholder="Abcd Xyz"
+                      className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08]
+                      text-white text-sm placeholder:text-gray-600
+                      focus:border-blue-500/60 focus:bg-white/[0.06] focus:outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] text-gray-500 uppercase tracking-widest">Company</label>
+                    <input
+                      name="company" type="text"
+                      placeholder="Abcd Electronics"
+                      className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08]
+                      text-white text-sm placeholder:text-gray-600
+                      focus:border-blue-500/60 focus:bg-white/[0.06] focus:outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] text-gray-500 uppercase tracking-widest">Work Email *</label>
+                    <input
+                      name="email" type="email" required
+                      placeholder="abcd@gmail.com"
+                      className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08]
+                      text-white text-sm placeholder:text-gray-600
+                      focus:border-blue-500/60 focus:bg-white/[0.06] focus:outline-none transition-all"
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] text-gray-500 uppercase tracking-widest">Phone</label>
+                    <input
+                      name="phone" type="tel"
+                      placeholder="+91 98765 43210"
+                      className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08]
+                      text-white text-sm placeholder:text-gray-600
+                      focus:border-blue-500/60 focus:bg-white/[0.06] focus:outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[11px] text-gray-500 uppercase tracking-widest">
+                    Tell us about your project *
+                  </label>
+                  <textarea
+                    name="project" rows={5} required
+                    placeholder="E.g. We need 5000 units of a custom PCB assembly with Texas Instruments and Murata parts. Target cost is ₹X, timeline is 6 weeks..."
+                    className="w-full px-4 py-3 bg-white/[0.04] border border-white/[0.08]
+                    text-white text-sm placeholder:text-gray-600
+                    focus:border-blue-500/60 focus:bg-white/[0.06] focus:outline-none transition-all
+                    resize-y min-h-[120px]"
+                  />
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.015 }}
+                  whileTap={{ scale: 0.985 }}
+                  type="submit"
+                  className="w-full py-3.5 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm
+                  flex items-center justify-center gap-2.5 transition-colors"
+                >
+                  <Send className="w-4 h-4 shrink-0" />
+                  <span>Get Your Quote Within 48 Hours</span>
+                  <ArrowRight className="w-4 h-4 shrink-0" />
+                </motion.button>
+
+                <p className="text-center text-gray-600 text-[11px]">
+                  We don't spam. Your details stay with us.
+                </p>
+              </form>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FOOTER ================= */}
+      <footer className="bg-[#080d18]">
+
+        <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+        {/* Main footer grid */}
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 py-12 sm:py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-12">
+
+            {/* Brand block */}
+            <div className="sm:col-span-2 md:col-span-4">
+              <div className="flex items-center gap-3 mb-4">
+                <Image
+                  src="/Logo.png"
+                  alt="SourceX Technologies"
+                  width={60}
+                  height={60}
+                  className="object-contain"
+                  priority
+                />
+                <span className="text-white font-semibold text-base">SourceX Technologies</span>
+              </div>
+
+              <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+                Trusted partner for electronic component sourcing, PCB assembly,
+                and supply chain solutions across India.
+              </p>
+
+              <div className="mt-6 space-y-2.5">
+                <a
+                  href="mailto:sourcex25@gmail.com"
+                  className="flex items-center gap-2.5 text-gray-500 hover:text-gray-300 text-sm transition-colors group"
+                >
+                  <Mail className="w-4 h-4 text-gray-600 group-hover:text-blue-400 transition-colors shrink-0" />
+                  sourcex25@gmail.com
+                </a>
+                <div className="flex items-center gap-2.5 text-gray-500 text-sm">
+                  <MapPin className="w-4 h-4 text-gray-600 shrink-0" />
+                  Hosur, Tamil Nadu, India
+                </div>
+              </div>
             </div>
 
-            <p className="text-center text-blue-200 text-xs mt-4">
-              Your information is secure. We respect your inbox.
-            </p>
-          </form>
-  </motion.div>
-</div>
+            {/* Spacer — desktop only */}
+            <div className="hidden md:block md:col-span-1" />
 
-{/* ================= FOOTER ================= */}
- <footer className="w-full mt-24 border-t border-white/50 pt-12 pb-8">
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 text-white">
-        
-        {/* LEFT: BRAND */}
-        <div className="md:col-span-5">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/Logo.png"
-              alt="SourceX Technologies"
-              width={100}
-              height={100}
-              className="object-contain"
-              priority
-            />
-            <h3 className="text-xl font-semibold tracking-tight text-white/90">
-              SourceX Technologies
-            </h3>
+            {/* Company links */}
+            <div className="md:col-span-2">
+              <p className="text-gray-300 text-xs font-semibold tracking-[0.18em] uppercase mb-5">
+                Company
+              </p>
+              <ul className="space-y-3">
+                {[
+                  { label: "About Us", href: "/nabout" },
+                  { label: "Services", href: "/nservices" },
+                  { label: "Products", href: "/nproducts" },
+                  { label: "Contact",  href: "/ncontact" },
+                ].map((l) => (
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Categories — links to /nproducts */}
+            <div className="md:col-span-2">
+              <p className="text-gray-300 text-xs font-semibold tracking-[0.18em] uppercase mb-5">
+                Categories
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Active Components",
+                  "Passive Components",
+                  "Modules",
+                  "Cables & Wires",
+                  "Accessories",
+                ].map((c) => (
+                  <li key={c}>
+                    <a
+                      href="/nproducts"
+                      className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                    >
+                      {c}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Top Brands — links to product offerings section */}
+            <div className="md:col-span-3">
+              <p className="text-gray-300 text-xs font-semibold tracking-[0.18em] uppercase mb-5">
+                Top Brands
+              </p>
+              <ul className="space-y-3">
+                {[
+                  "Texas Instruments",
+                  "STMicroelectronics",
+                  "Infineon",
+                  "Vishay",
+                  "Yageo",
+                  "Espressif",
+                ].map((b) => (
+                  <li key={b}>
+                    <a
+                      href="/#product-offerings"
+                      className="text-gray-500 hover:text-gray-300 text-sm transition-colors"
+                    >
+                      {b}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
+        </div>
 
-          <p className="mt-4 text-white/80 text-sm leading-relaxed max-w-md">
-            Your trusted global partner for electronic component sourcing, PCB assembly,
-            and supply chain solutions. Helping hardware startups and manufacturers scale faster.
+        {/* Bottom bar */}
+        <div className="h-px bg-white/[0.05]" />
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-gray-600 text-xs text-center sm:text-left">
+            © {new Date().getFullYear()} SourceX Technologies Private Limited. All rights reserved.
           </p>
-        </div>
-
-        {/* CENTER: LINKS */}
-        <div className="md:col-span-3">
-          <h4 className="text-white/80 font-medium mb-4">Company</h4>
-
-          <div className="flex flex-col gap-2 text-sm text-white/80 relative z-10">
-            <a href="/nabout" className="hover:text-white transition">About Us</a>
-            <a href="/nservices" className="hover:text-white transition">Our Services</a>
-            <a href="/nproducts" className="hover:text-white transition">Products</a>
-            <a href="/contact" className="hover:text-white transition">Contact</a>
+          <div className="flex items-center gap-5">
+            <a href="#" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">
+              Terms of Service
+            </a>
           </div>
         </div>
 
-        {/* RIGHT: CONTACT */}
-        <div className="md:col-span-4 md:text-right">
-          <h4 className="text-white/80 font-medium mb-4">Get in Touch</h4>
+      </footer>
 
-          <a
-            href="mailto:sourcex25@gmail.com"
-            className="block text-white/80 hover:text-white transition text-sm"
-          >
-            sourcex25@gmail.com
-          </a>
-
-          <p className="text-white/80 text-sm mt-2">
-            Hosur, Tamil Nadu, India
-          </p>
-
-          <div className="mt-8 text-xs text-white/80">
-            © {new Date().getFullYear()} SourceX Technologies Private Limited<br />
-            All Rights Reserved • Privacy Policy • Terms of Service
-          </div>
-        </div>
-      </div>
-    </footer>
-  </section>
+    </div>
   );
 }

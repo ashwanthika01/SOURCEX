@@ -1,246 +1,363 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import {
-  TrendingUp,
-  Lightbulb,
-  HeartHandshake,
-  Check,
-} from "lucide-react";
-import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key } from "react";
+import { useState } from "react";
+import Image from "next/image";
+import { ArrowRight, X, ChevronDown } from "lucide-react";
 
-//////////////////////////////////////////////////////////
-// DATA
-//////////////////////////////////////////////////////////
-const services = [
+const categories = [
+  "All",
+  "ICs & Microcontrollers",
+  "Power Management",
+  "Protection Devices",
+  "Passive Components",
+  "Connectors & Interconnects",
+];
+
+const products = [
   {
-    title: ["End-to-end", "BOM fulfillment"],
-    description:
-      "Upload your BOM and receive a complete sourcing plan including pricing, lead times and alternatives.",
-    points: [
-      "Full sourcing plan",
-      "Alternate components",
-      "Reliable delivery",
-    ],
-    type: "arrow",
+    title: "ARM Cortex M0+ Microcontroller",
+    category: "ICs & Microcontrollers",
+    stock: "In Stock",
+    rating: 4.9,
+    description: "High-performance 32-bit MCU for embedded applications",
+    image: "/components/mcu.png",
   },
   {
-    title: ["Cost-optimized", "sourcing"],
-    description:
-      "We negotiate with a global supplier network to secure best-in-class pricing without compromising quality.",
-    points: ["Best pricing", "Global suppliers", "Quality assurance"],
-    type: "bulb",
+    title: "N-Channel MOSFET",
+    category: "Power Management",
+    stock: "In Stock",
+    rating: 4.8,
+    description: "Low RDS(on) for efficient power switching",
+    image: "/components/mosfet.jpg",
   },
   {
-    title: ["Supply-chain", "resilience"],
-    description:
-      "Risk analysis, second-source strategies and lifecycle monitoring to keep your lines running.",
-    points: ["Risk analysis", "Backup sourcing", "Lifecycle tracking"],
-    type: "heart",
+    title: "LDO Voltage Regulator",
+    category: "Power Management",
+    stock: "In Stock",
+    rating: 4.7,
+    description: "Ultra-low dropout, high PSRR regulator",
+    image: "/components/regulator.webp",
+  },
+  {
+    title: "TVS Diode Array",
+    category: "Protection Devices",
+    stock: "In Stock",
+    rating: 4.6,
+    description: "ESD and surge protection solution",
+    image: "/components/tvs-diode.jpg",
+  },
+  {
+    title: "Electrolytic Capacitor",
+    category: "Passive Components",
+    stock: "In Stock",
+    rating: 4.5,
+    description: "High capacitance for power filtering and smoothing",
+    image: "/components/electrolytic-capacitor.jpg",
+  },
+  {
+    title: "Precision Resistor",
+    category: "Passive Components",
+    stock: "In Stock",
+    rating: 4.4,
+    description: "High-accuracy resistance for critical circuits",
+    image: "/components/precision-resistor.jpg",
   },
 ];
 
+export default function CategorySection() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [notes, setNotes] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false); // For mobile dropdown
 
-// SCROLL ANIMATION 
+  // ================== FORMSPREE CONFIGURATION ==================
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojraoqw"; 
+  // ============================================================
 
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-    scale: 0.96,
-  },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      delay: i * 0.2,
-      duration: 1,
-      ease: "easeInOut" as const,
-    },
-  }),
-};
+  const filteredProducts = 
+    activeCategory === "All" 
+      ? products 
+      : products.filter((p) => p.category === activeCategory);
 
-//////////////////////////////////////////////////////////
-// MAIN
-//////////////////////////////////////////////////////////
-export default function Services() {
-  return (
-    <section
-     id = "next"
-     className="relative min-h-screen bg-[#f7f9fc] flex items-center px-8 py-24 overflow-hidden">
-      
-      {/* 🌟 BACKGROUND GLOW */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-200 opacity-20 blur-3xl rounded-full" />
-        <div className="absolute bottom-20 right-20 w-72 h-72 bg-yellow-200 opacity-20 blur-3xl rounded-full" />
-      </div>
+  const openQuoteModal = (product: any) => {
+    setSelectedProduct(product);
+    setQuantity(1);
+    setNotes("");
+    setIsQuoteModalOpen(true);
+  };
 
-      <div className="max-w-7xl mx-auto w-full grid md:grid-cols-3 gap-24 relative z-10">
-        {services.map((service, index) => (
-          <ServiceCard key={index} service={service} index={index} />
-        ))}
-      </div>
-    </section>
-  );
-}
+  const closeQuoteModal = () => {
+    setIsQuoteModalOpen(false);
+    setSelectedProduct(null);
+  };
 
-//////////////////////////////////////////////////////////
-// CARD (MAGNETIC + SPOTLIGHT)
-//////////////////////////////////////////////////////////
-function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const handleSubmitQuote = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedProduct) return;
 
-  const springX = useSpring(mouseX, { stiffness: 120, damping: 15 });
-  const springY = useSpring(mouseY, { stiffness: 120, damping: 15 });
+    setIsSubmitting(true);
 
-  const rotateX = useTransform(springY, [-100, 100], [10, -10]);
-  const rotateY = useTransform(springX, [-100, 100], [-10, 10]);
+    const formData = new FormData();
+    formData.append("product_name", selectedProduct.title);
+    formData.append("category", selectedProduct.category);
+    formData.append("quantity", quantity.toString());
+    formData.append("notes", notes || "No additional notes");
+    formData.append("_subject", `New Quote Request - ${selectedProduct.title}`);
+    formData.append("_next", window.location.href);
 
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - rect.width / 2);
-    mouseY.set(e.clientY - rect.top - rect.height / 2);
-  }
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
 
-  function reset() {
-    mouseX.set(0);
-    mouseY.set(0);
-  }
+      if (response.ok) {
+        alert("✅ Quote request submitted successfully!\n\nWe will contact you within 24 hours.");
+        closeQuoteModal();
+      } else {
+        alert("❌ Failed to submit request. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting quote:", error);
+      alert("❌ Something went wrong. Please check your internet and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <motion.div
-      custom={index}
-      variants={itemVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-50px" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={reset}
-      style={{ rotateX, rotateY }}
-      className="relative text-center group"
-    >
-      {/* ✨ SPOTLIGHT */}
-      <motion.div
-        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500"
-        style={{
-          background:
-            "radial-gradient(circle at center, rgba(59,130,246,0.15), transparent 70%)",
-        }}
-      />
-
-      {/* ICON */}
-      <div className="flex justify-center mb-10">
-        {service.type === "arrow" && <ArrowIcon />}
-        {service.type === "bulb" && <BulbIcon />}
-        {service.type === "heart" && <HeartIcon />}
-      </div>
-
-      {/* TITLE */}
-      <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight mb-6">
-        {service.title[0]} <br /> {service.title[1]}
-      </h3>
-
-      {/* DESCRIPTION */}
-      <p className="text-gray-500 text-base leading-relaxed mb-10 px-6">
-        {service.description}
-      </p>
-
-      {/* BULLETS */}
-      <div className="space-y-5 text-left inline-block">
-        {service.points.map((point: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined, i: Key | null | undefined) => (
-          <div key={i} className="flex items-center gap-4">
-            <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center">
-              <Check size={14} className="text-blue-500" />
-            </div>
-            <span className="text-lg font-medium text-gray-800">
-              {point}
-            </span>
+    <section className="bg-white py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
+          <div>
+            <span className="text-blue-600 font-medium text-sm tracking-widest">CATEGORIES</span>
+            <h2 className="text-4xl font-semibold text-gray-900 mt-2">
+              Featured Electronic Components
+            </h2>
+            <p className="text-gray-600 mt-3 max-w-md">
+              High-quality components sourced from trusted manufacturers worldwide
+            </p>
           </div>
-        ))}
+
+          <a 
+            href="/nproducts" 
+            className="mt-6 md:mt-0 flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium group"
+          >
+            View Complete Catalog 
+            <ArrowRight className="group-hover:translate-x-1 transition" />
+          </a>
+        </div>
+
+        {/* Category Selection - Desktop Tabs + Mobile Dropdown */}
+        <div className="mb-12">
+          {/* Desktop: Horizontal Tabs */}
+          <div className="hidden md:flex flex-wrap gap-2 border-b border-gray-100 pb-6">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all whitespace-nowrap
+                  ${activeCategory === cat 
+                    ? "bg-blue-600 text-white shadow-sm" 
+                    : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                  }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile: Dropdown Toggle */}
+          <div className="md:hidden relative">
+            <button
+              onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+              className="w-full flex items-center justify-between bg-gray-100 hover:bg-gray-200 border border-gray-200 px-5 py-4 rounded-2xl text-left font-medium"
+            >
+              <span>{activeCategory}</span>
+              <ChevronDown className={`transition-transform ${isCategoryOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isCategoryOpen && (
+              <div className="absolute mt-2 w-full bg-white border border-gray-200 rounded-2xl shadow-lg z-40 py-2">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => {
+                      setActiveCategory(cat);
+                      setIsCategoryOpen(false);
+                    }}
+                    className={`w-full text-left px-5 py-3 hover:bg-gray-50 transition ${
+                      activeCategory === cat ? "text-blue-600 font-medium" : "text-gray-700"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Products - Horizontal Scroll on Mobile, Grid on Desktop */}
+        <div className="relative">
+          <div className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-6 md:overflow-visible md:pb-0">
+            {filteredProducts.map((product, index) => (
+              <div
+                key={index}
+                className="min-w-[280px] md:min-w-0 group border border-gray-200 rounded-2xl overflow-hidden bg-white hover:shadow-xl hover:border-gray-300 transition-all duration-300 snap-start"
+              >
+                {/* Image Container */}
+                <div className="h-52 bg-gray-50 relative overflow-hidden">
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    fill
+                    className="object-contain p-6 group-hover:scale-110 transition-transform duration-500"
+                  />
+                  
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-emerald-100 text-emerald-700 text-xs font-medium px-3 py-1 rounded-full">
+                      {product.stock}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-5">
+                  <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight min-h-[44px]">
+                    {product.title}
+                  </h3>
+                  
+                  <p className="text-sm text-gray-500 mt-2 line-clamp-2">
+                    {product.description}
+                  </p>
+
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="flex items-center gap-1 text-amber-500 text-sm">
+                      ★ <span className="text-gray-600 font-medium">{product.rating}</span>
+                    </div>
+                    <span className="text-xs text-gray-500">MOQ: 1 pc</span>
+                  </div>
+
+                  <button 
+                    onClick={() => openQuoteModal(product)}
+                    className="mt-5 w-full bg-gray-900 hover:bg-black text-white py-3.5 rounded-xl text-sm font-medium transition-all active:scale-[0.985]"
+                  >
+                    Request Quote
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* View All Button */}
+        <div className="flex justify-center mt-12">
+          <a
+            href="/nproducts"
+            className="border border-gray-300 hover:border-gray-400 px-8 py-3.5 rounded-2xl text-sm font-medium flex items-center gap-2 transition"
+          >
+            Browse All Components
+            <ArrowRight size={18} />
+          </a>
+        </div>
       </div>
-    </motion.div>
-  );
-}
 
-//////////////////////////////////////////////////////////
-// 📈 ARROW (PARALLAX FLOAT)
-//////////////////////////////////////////////////////////
-function ArrowIcon() {
-  return (
-    <motion.div
-      animate={{ y: [0, -25, 0] }}
-      transition={{ duration: 3, repeat: Infinity }}
-      className="relative"
-    >
-      <TrendingUp size={100} className="text-black" />
+      {/* ====================== REQUEST QUOTE MODAL ====================== */}
+      {isQuoteModalOpen && selectedProduct && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl">
+            <form onSubmit={handleSubmitQuote}>
+              <div className="flex items-center justify-between p-6 border-b">
+                <h3 className="text-xl font-semibold text-gray-900">Request a Quote</h3>
+                <button 
+                  type="button"
+                  onClick={closeQuoteModal}
+                  className="text-gray-400 hover:text-gray-600 transition"
+                >
+                  <X size={24} />
+                </button>
+              </div>
 
-      <motion.div
-        className="absolute inset-0 bg-blue-200 blur-2xl rounded-full"
-        animate={{ opacity: [0.3, 0.7, 0.3] }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-    </motion.div>
-  );
-}
+              <div className="p-6 border-b flex gap-5">
+                <div className="w-24 h-24 bg-gray-100 rounded-2xl overflow-hidden flex-shrink-0">
+                  <Image 
+                    src={selectedProduct.image} 
+                    alt={selectedProduct.title}
+                    width={96} 
+                    height={96}
+                    className="object-contain p-2"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-lg leading-tight text-gray-900">
+                    {selectedProduct.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 mt-2">
+                    {selectedProduct.description}
+                  </p>
+                  <p className="text-xs text-emerald-600 mt-3 font-medium">
+                    {selectedProduct.stock}
+                  </p>
+                </div>
+              </div>
 
-//////////////////////////////////////////////////////////
-// 💡 BULB (ON/OFF)
-//////////////////////////////////////////////////////////
-function BulbIcon() {
-  return (
-    <div className="relative">
-      <motion.div
-        className="absolute inset-0 blur-2xl rounded-full"
-        animate={{
-          opacity: [0, 0.4, 0.9, 0.4, 0],
-          backgroundColor: [
-            "#bfdbfe",
-            "#fde68a",
-            "#fde68a",
-            "#93c5fd",
-            "#bfdbfe",
-          ],
-          scale: [0.8, 1.4, 1.6, 1.4, 0.8],
-        }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
+              <div className="p-6 space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Quantity Required
+                  </label>
+                  <input
+                    type="number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-full border border-gray-300 rounded-2xl px-5 py-3.5 text-lg focus:outline-none focus:border-blue-600"
+                    min="1"
+                    required
+                  />
+                </div>
 
-      <motion.div
-        animate={{
-          color: ["#111827", "#111827", "#facc15", "#facc15", "#111827"],
-        }}
-        transition={{ duration: 3, repeat: Infinity }}
-      >
-        <Lightbulb size={100} className="text-black" />
-      </motion.div>
-    </div>
-  );
-}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Additional Requirements / Notes (Optional)
+                  </label>
+                  <textarea 
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    rows={4}
+                    placeholder="Target price, delivery timeline, special specifications, etc."
+                    className="w-full border border-gray-300 rounded-2xl px-5 py-3.5 focus:outline-none focus:border-blue-600 resize-y"
+                  />
+                </div>
+              </div>
 
-//////////////////////////////////////////////////////////
-// ❤️ HEART (PULSE)
-//////////////////////////////////////////////////////////
-function HeartIcon() {
-  return (
-    <motion.div
-      animate={{ scale: [1, 1.18, 1] }}
-      transition={{ duration: 1.2, repeat: Infinity }}
-      className="relative"
-    >
-      <HeartHandshake size={100} className="text-black" />
-
-      <motion.div
-        className="absolute inset-0 rounded-full border-2 border-blue-300"
-        animate={{ scale: [1, 1.8], opacity: [0.5, 0] }}
-        transition={{ duration: 1.2, repeat: Infinity }}
-      />
-    </motion.div>
+              <div className="p-6 border-t bg-gray-50 flex gap-3">
+                <button 
+                  type="button"
+                  onClick={closeQuoteModal}
+                  className="flex-1 py-4 border border-gray-300 rounded-2xl font-medium text-gray-700 hover:bg-gray-100 transition"
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-2xl font-semibold transition"
+                >
+                  {isSubmitting ? "Sending Request..." : "Submit Quote Request"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </section>
   );
 }

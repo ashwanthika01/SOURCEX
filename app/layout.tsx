@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
+import FeedbackTab from "./components/FeedbackTab";
 
 export const metadata: Metadata = {
   title: "SourceX Technologies | Electronic Component Sourcing",
@@ -17,7 +18,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <Navbar />
-        {children}   
+        {children}
+        <FeedbackTab />   
       </body>
     </html>
   );

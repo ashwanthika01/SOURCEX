@@ -5,98 +5,137 @@ import {
   Cpu,
   CircuitBoard,
   Cable,
-  HelpCircle,
+  Globe,
+  ArrowRight,
 } from "lucide-react";
 
-//////////////////////////////////////////////////////////
-// DATA
-//////////////////////////////////////////////////////////
-const categories = [
+const industries = [
   {
-    title: "Passive components",
+    title: "Industrial Automation",
     description:
-      "High-quality resistors, capacitors and inductors for stable and reliable circuit performance.",
+      "Reliable components for robotics and smart factories.",
     icon: CircuitBoard,
   },
   {
-    title: "Active components",
+    title: "Automotive & EV",
     description:
-      "MCUs, power ICs and analog solutions designed for performance-critical applications.",
+      "Solutions for EV systems and vehicle control.",
     icon: Cpu,
   },
   {
-    title: "Interconnect & mechanical",
+    title: "Consumer Electronics",
     description:
-      "Connectors, cables, enclosures and thermal solutions for complete system integration.",
+      "Optimized components for smart devices.",
     icon: Cable,
   },
   {
-    title: "Not sure what you need?",
+    title: "IoT Systems",
     description:
-      "We help you identify the right components based on your requirements and use case.",
-    icon: HelpCircle,
+      "Connected low-power embedded solutions.",
+    icon: Globe,
   },
 ];
 
-//////////////////////////////////////////////////////////
-// MAIN
-//////////////////////////////////////////////////////////
-export default function Products() {
+export default function IndustrySection() {
   return (
-    <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-screen bg-gradient-to-br from-[#7dd3fc] via-[#60a5fa] to-[#3b82f6] py-28 px-10 md:px-20 flex flex-col justify-between overflow-hidden">
-      
-      {/* TOP TEXT */}
-      <div className="max-w-[1400px] w-full mx-auto">
-        <p className="text-white/80 text-sm mb-6 tracking-wide">
-          Our product expertise
-        </p>
+    <section className="bg-[#0a0f1c] text-white py-14 sm:py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <h2 className="text-white text-[52px] md:text-[80px] font-bold leading-[1.05] max-w-5xl">
-          Find the right <br /> components for your build
-        </h2>
-      </div>
+        {/* HEADER */}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-14 md:mb-20">
 
-      {/* CARDS */}
-      <div className="max-w-[1400px] w-full mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-20">
-        {categories.map((cat, index) => {
-          const Icon = cat.icon;
-
-          return (
+          {/* LEFT TEXT */}
+          <div className="lg:col-span-5 text-center lg:text-left">
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.7 }}
               viewport={{ once: true }}
-              whileHover={{ y: -8 }}
-              className="bg-white rounded-[22px] px-8 py-10 shadow-md hover:shadow-xl transition-all duration-300"
             >
-              {/* ICON */}
-              <div className="flex justify-center mb-8">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-20 h-20 rounded-2xl bg-blue-100 flex items-center justify-center shadow-inner"
-                >
-                  <Icon
-                    size={36}
-                    strokeWidth={1.8}
-                    className="text-blue-600"
-                  />
-                </motion.div>
-              </div>
+              <span className="text-blue-400 text-xs sm:text-sm font-medium tracking-widest mb-3 block">
+                INDUSTRIES WE SERVE
+              </span>
 
-              {/* TITLE */}
-              <h3 className="text-[18px] font-semibold text-gray-800 text-center mb-3">
-                {cat.title}
-              </h3>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+                Powering Innovation Across{" "}
+                <span className="text-blue-400">Industries</span>
+              </h2>
 
-              {/* DESCRIPTION */}
-              <p className="text-[14px] text-gray-500 text-center leading-relaxed">
-                {cat.description}
+              <p className="text-sm sm:text-base text-white/70 mt-4 sm:mt-6 max-w-md mx-auto lg:mx-0">
+                High-performance components tailored for modern engineering
+                and scalable production systems.
               </p>
             </motion.div>
-          );
-        })}
+          </div>
+
+          {/* GRID */}
+          <div className="lg:col-span-7">
+
+            {/* ✅ KEY CHANGE HERE */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+
+              {industries.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -4 }}
+                    className="group bg-white/5 border border-white/10 rounded-xl p-4 sm:p-6 hover:border-blue-500/40 hover:bg-white/10 transition"
+                  >
+                    {/* ICON */}
+                    <div className="mb-3 sm:mb-4">
+                      <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400" />
+                      </div>
+                    </div>
+
+                    {/* TITLE */}
+                    <h3 className="text-sm sm:text-base font-semibold mb-1 sm:mb-2 group-hover:text-blue-400 transition">
+                      {item.title}
+                    </h3>
+
+                    {/* DESC */}
+                    <p className="text-xs sm:text-sm text-white/60 leading-snug">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+          className="border-t border-white/10 pt-8 sm:pt-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left"
+        >
+          <div>
+            <p className="text-white/80 text-sm sm:text-base">
+              Need help selecting the right components?
+            </p>
+            <p className="text-white/60 text-xs sm:text-sm mt-1">
+              Our experts are ready to support your project.
+            </p>
+          </div>
+
+          <a
+            href="/#contact-form"
+            className="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 px-5 sm:px-7 py-3 rounded-xl text-sm font-medium transition"
+          >
+            Get Expert Advice
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
+          </a>
+        </motion.div>
+
       </div>
     </section>
   );

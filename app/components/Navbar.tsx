@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Services", href: "/nservices" },
@@ -15,21 +14,17 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const active = hovered || scrolled;
-
-  // ✅ SCROLL FUNCTION
   const scrollToForm = () => {
-    const formElement = document.getElementById("inquiry-form");
+    const formElement = document.getElementById("contact-form");
 
     if (formElement) {
       const offset = 80;
@@ -41,132 +36,97 @@ export default function Navbar() {
         behavior: "smooth",
       });
     } else {
-      // fallback → go to homepage then scroll
-      window.location.href = "/#inquiry-form";
+      window.location.href = "/#contact-form";
     }
   };
 
   return (
     <>
-      {/* NAVBAR */}
-      <motion.div
-        className="fixed top-4 left-0 w-full z-50 flex justify-center px-4"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <motion.nav
-          initial={{ y: -80, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className={`relative w-full max-w-6xl px-6 py-3 flex items-center justify-between transition-all duration-500 rounded-full ${
-            active
-              ? "bg-white/90 backdrop-blur-xl shadow-lg border border-gray-200"
-              : "bg-transparent border border-transparent"
+      {/* 🌍 GLOBAL FLOATING NAVBAR */}
+      <div className="fixed top-0 left-0 w-full z-50">
+        <div
+          className={`transition-all duration-300 ${
+            scrolled
+              ? "bg-black/80 backdrop-blur-md border-b border-white/10"
+              : "bg-transparent"
           }`}
         >
-          {/* LOGO */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative w-14 h-9 flex items-center justify-center">
-              <Image
-                src="/Logo.png"
-                alt="SourceX Technologies"
-                fill
-                sizes="56px"
-                className="object-contain scale-130 translate-y-[2px]"
-                priority
-              />
-            </div>
+          <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
 
-            <div
-              className={`text-xl font-semibold tracking-tight transition-colors ${
-                active ? "text-gray-900" : "text-white"
-              }`}
-            >
-              SourceX
-            </div>
-          </Link>
+            {/* LOGO */}
+            <Link href="/" className="flex items-center gap-2">
+              <div className="relative w-12 h-8">
+                <Image
+                  src="/Logo.png"
+                  alt="SourceX"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span className="text-white font-semibold text-lg tracking-tight">
+                SourceX Technologies
+              </span>
+            </Link>
 
-          {/* DESKTOP MENU */}
-          <div className="hidden md:flex items-center gap-8 text-sm">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`transition ${
-                  active
-                    ? "text-gray-700 hover:text-blue-600"
-                    : "text-white/90 hover:text-white"
-                }`}
+            {/* DESKTOP MENU */}
+            <div className="hidden md:flex items-center gap-8 text-sm text-white/80">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="hover:text-white transition"
+                >
+                  {link.label}
+                </Link>
+              ))}
+
+              {/* CTA */}
+              <button
+                onClick={scrollToForm}
+                className="ml-4 px-5 py-2 rounded-md bg-blue-500 hover:bg-blue-400 text-white text-sm font-medium transition"
               >
-                {link.label}
-              </Link>
-            ))}
+                Get a Quote
+              </button>
+            </div>
 
-            {/* ✅ FIXED BUTTON */}
+            {/* MOBILE BUTTON */}
             <button
-              onClick={scrollToForm}
-              className={`ml-4 rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
-                active
-                  ? "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
-                  : "bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm"
-              }`}
+              onClick={() => setOpen(!open)}
+              className="md:hidden flex flex-col gap-1.5"
             >
-              Get a Quote
+              <span className="w-6 h-0.5 bg-white" />
+              <span className="w-6 h-0.5 bg-white" />
             </button>
           </div>
+        </div>
+      </div>
 
-          {/* MOBILE MENU BUTTON */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden flex flex-col gap-1.5"
-          >
-            <span
-              className={`w-6 h-0.5 ${
-                active ? "bg-gray-900" : "bg-white"
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 ${
-                active ? "bg-gray-900" : "bg-white"
-              }`}
-            />
-          </button>
-        </motion.nav>
-      </motion.div>
-
-      {/* MOBILE MENU */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={open ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-        className={`fixed top-20 left-0 w-full px-6 md:hidden z-40 ${
-          open ? "block" : "hidden"
-        }`}
-      >
-        <div className="bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-xl p-6 flex flex-col gap-4 text-sm">
+      {/* 📱 MOBILE MENU */}
+      {open && (
+        <div className="fixed top-[64px] left-0 w-full bg-black/95 border-b border-white/10 px-6 py-4 flex flex-col gap-4 text-sm text-white/80 z-40">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-gray-800 hover:text-blue-600 py-1"
               onClick={() => setOpen(false)}
+              className="hover:text-white"
             >
               {link.label}
             </Link>
           ))}
 
-          {/* ✅ FIXED MOBILE BUTTON */}
           <button
             onClick={() => {
               setOpen(false);
               scrollToForm();
             }}
-            className="mt-4 rounded-full bg-blue-600 px-6 py-3 text-white text-center font-medium"
+            className="mt-2 px-5 py-2 rounded-md bg-blue-500 text-white"
           >
             Get a Quote
           </button>
         </div>
-      </motion.div>
+      )}
     </>
   );
 }
