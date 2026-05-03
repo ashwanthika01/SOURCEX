@@ -321,7 +321,8 @@ export default function Hero() {
   const showDropdown = search.trim().length > 0;
 
   return (
-    <section className="relative w-full min-h-screen bg-black text-white overflow-hidden">
+    <section id="hero"
+    className="relative w-full min-h-screen bg-black text-white overflow-hidden">
 
       {/* Background video */}
       <video autoPlay loop muted playsInline

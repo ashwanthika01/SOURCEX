@@ -57,7 +57,7 @@ export default function CTAFooter() {
                 {[
                   { num: "10,000+", label: "Components delivered" },
                   { num: "500+",    label: "Brands we work with" },
-                  { num: "15+",     label: "Years in the business" },
+                  { num: "1+",     label: "Years in the business" },
                 ].map((s, i) => (
                   <motion.div
                     key={i}
@@ -299,10 +299,10 @@ export default function CTAFooter() {
             © {new Date().getFullYear()} SourceX Technologies Private Limited. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
-            <a href="#" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">
+            <a href="/privacy-center" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">
+            <a href="/terms" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">
               Terms of Service
             </a>
           </div>
