@@ -138,7 +138,7 @@ const whyPoints = [
 const whyStats = [
   { val: "10,000+", label: "Components Delivered" },
   { val: "500+",    label: "Verified Brands" },
-  { val: "15+",     label: "Years Experience" },
+  { val: "1+",     label: "Years Experience" },
   { val: "48hr",    label: "Quote Turnaround" },
 ];
 
@@ -631,7 +631,7 @@ export default function ServicesPage() {
                 We specialise in sourcing and delivering high-quality electronic
                 components from trusted global manufacturers. From a single resistor
                 to a complete BOM, SourceX handles it with the same precision and
-                care — backed by 15+ years of deep industry relationships.
+                care — backed by 1+ years of deep industry relationships.
               </motion.p>
 
               {whyPoints.map((point, i) => (

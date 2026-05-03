@@ -55,10 +55,10 @@ export default function PrivacyPolicy() {
         <div className="hero-inner">
           <div className="breadcrumb">
             <Link href="/">SourceX</Link>
-            <span>/ Privacy Center</span>
+            <span>/ Privacy Policy</span>
           </div>
           
-          <h1>Privacy Center</h1>
+          <h1>Privacy Policy</h1>
           
           <p className="hero-lead">
             We care about your privacy and want to help you understand how we collect, 
