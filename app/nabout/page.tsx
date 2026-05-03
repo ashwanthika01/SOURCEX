@@ -119,7 +119,7 @@ const features = [
 const stats = [
   { value: 10000, suffix: "+", label: "Components Delivered" },
   { value: 500,   suffix: "+", label: "Brands We Work With" },
-  { value: 15,    suffix: "+", label: "Years in Business" },
+  { value: 1,    suffix: "+", label: "Years in Business" },
   { value: 80,    suffix: "+", label: "Supplier Lines" },
 ];
 
