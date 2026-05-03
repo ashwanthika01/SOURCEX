@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Menu, X } from "lucide-react";
 
 export default function TermsAndConditions() {
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const sections = sectionRefs.current;
@@ -36,8 +38,18 @@ export default function TermsAndConditions() {
     sectionRefs.current[index] = el;
   };
 
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const navItems = [
+    "acceptance", "use-of-site", "accounts", "intellectual-property",
+    "user-content", "prohibited-conduct", "privacy", "disclaimers",
+    "limitation-liability", "indemnification", "termination",
+    "governing-law", "changes", "contact",
+  ];
+
   return (
-    <>
+    <div className="min-h-screen bg-[#f8f9fa]">
       {/* HERO */}
       <section className="hero">
         <div className="hero-inner">
@@ -61,27 +73,39 @@ export default function TermsAndConditions() {
 
       {/* BODY */}
       <div className="page-body">
-        <aside className="sidebar">
-          <p className="sidebar-label">ON THIS PAGE</p>
+        {/* Mobile Toggle Button */}
+        <div className="mobile-toggle">
+          <button 
+            onClick={toggleMobileMenu}
+            className="mobile-toggle-btn"
+            aria-label="Toggle Table of Contents"
+          >
+            <Menu size={20} />
+            <span>Table of Contents</span>
+          </button>
+        </div>
+
+        {/* Sidebar */}
+        <aside className={`sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+          <div className="sidebar-header">
+            <p className="sidebar-label">ON THIS PAGE</p>
+            <button 
+              onClick={closeMobileMenu}
+              className="close-btn md:hidden"
+              aria-label="Close menu"
+            >
+              <X size={22} />
+            </button>
+          </div>
+          
           <ul className="sidebar-nav">
-            {[
-              "acceptance",
-              "use-of-site",
-              "accounts",
-              "intellectual-property",
-              "user-content",
-              "prohibited-conduct",
-              "privacy",
-              "disclaimers",
-              "limitation-liability",
-              "indemnification",
-              "termination",
-              "governing-law",
-              "changes",
-              "contact",
-            ].map((id, i) => (
+            {navItems.map((id, i) => (
               <li key={id}>
-                <a href={`#${id}`} className={i === 0 ? "active" : ""}>
+                <a 
+                  href={`#${id}`} 
+                  className={i === 0 ? "active" : ""}
+                  onClick={closeMobileMenu}
+                >
                   {id.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                 </a>
               </li>
@@ -223,13 +247,12 @@ export default function TermsAndConditions() {
         </main>
       </div>
 
-      {/* Footer - Same as Privacy Page */}
+      {/* FOOTER */}
       <footer className="bg-[#080d18]">
         <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
         <div className="max-w-6xl mx-auto px-5 sm:px-8 md:px-12 py-10 sm:py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8 sm:gap-10 md:gap-12">
-            {/* Brand & Contact */}
             <div className="sm:col-span-2 md:col-span-4">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-white font-semibold text-xl">SourceX</span>
@@ -272,37 +295,145 @@ export default function TermsAndConditions() {
         </div>
       </footer>
 
-      {/* STYLES (Same as Privacy Page) */}
+      {/* STYLES */}
       <style jsx global>{`
-        body { background: #f8f9fa; color: #1e2937; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        .hero { background: #0f172a; color: white; padding: 5rem 2rem; text-align: center; }
+        * { box-sizing: border-box; }
+
+        html, body {
+          background: #f8f9fa;
+          color: #1e2937;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .hero { 
+          background: #0f172a; 
+          color: white; 
+          padding: 5rem 1.25rem; 
+          text-align: center; 
+        }
         .hero-inner { max-width: 800px; margin: 0 auto; }
         .breadcrumb { font-size: 0.9rem; color: #94a3b8; margin-bottom: 1rem; }
         .breadcrumb a { color: inherit; text-decoration: none; }
-        .hero h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 1.25rem; }
-        .hero-lead { font-size: 1.2rem; line-height: 1.7; color: #cbd5e1; max-width: 680px; margin: 0 auto 2rem; }
-        .hero-meta { font-size: 0.95rem; color: #94a3b8; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+        .hero h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1.25rem; }
+        .hero-lead { font-size: 1.15rem; line-height: 1.7; color: #cbd5e1; max-width: 680px; margin: 0 auto 2rem; }
+        .hero-meta { 
+          font-size: 0.95rem; 
+          color: #94a3b8; 
+          display: flex; 
+          gap: 1.5rem; 
+          justify-content: center; 
+          flex-wrap: wrap; 
+        }
 
-        .page-body { display: grid; grid-template-columns: 280px 1fr; gap: 5rem; max-width: 1200px; margin: 4rem auto; padding: 0 2rem; }
-        .sidebar { position: sticky; top: 2rem; align-self: start; }
-        .sidebar-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 1rem; }
+        .page-body {
+          max-width: 1200px;
+          margin: 3rem auto;
+          padding: 0 1.25rem;
+          display: grid;
+          grid-template-columns: 280px 1fr;
+          gap: 4rem;
+        }
+
+        .mobile-toggle { display: none; margin-bottom: 1.5rem; }
+        .mobile-toggle-btn {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background: white;
+          border: 1px solid #e2e8f0;
+          padding: 12px 18px;
+          border-radius: 8px;
+          font-weight: 500;
+          color: #1e40af;
+        }
+
+        .sidebar {
+          position: sticky;
+          top: 2rem;
+          align-self: start;
+          height: fit-content;
+        }
+
+        .sidebar-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+        }
+
+        .sidebar-label { 
+          font-size: 0.8rem; 
+          font-weight: 600; 
+          text-transform: uppercase; 
+          letter-spacing: 1px; 
+          color: #64748b; 
+        }
 
         .sidebar-nav a {
-          display: block; padding: 10px 0; color: #475569; text-decoration: none;
-          font-size: 1.05rem; border-left: 3px solid transparent; padding-left: 1rem;
+          display: block;
+          padding: 10px 0;
+          color: #475569;
+          text-decoration: none;
+          font-size: 1.05rem;
+          border-left: 3px solid transparent;
+          padding-left: 1rem;
+          transition: all 0.2s;
         }
-        .sidebar-nav a:hover, .sidebar-nav a.active { color: #1e40af; border-left-color: #1e40af; font-weight: 500; }
 
-        .content h2 { font-size: 1.75rem; font-weight: 600; margin: 3rem 0 1.25rem; color: #0f172a; }
-        .content p { line-height: 1.85; color: #334155; margin-bottom: 1.25rem; }
-        .content ul { padding-left: 1.4rem; margin-bottom: 1.5rem; }
-        .content li { margin-bottom: 0.85rem; line-height: 1.7; }
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+          color: #1e40af;
+          border-left-color: #1e40af;
+          font-weight: 500;
+        }
 
+        .content h2 {
+          font-size: 1.75rem;
+          font-weight: 600;
+          margin: 3rem 0 1.25rem;
+          color: #0f172a;
+        }
+        .content p { 
+          line-height: 1.85; 
+          color: #334155; 
+          margin-bottom: 1.25rem; 
+        }
+        .content ul { 
+          padding-left: 1.4rem; 
+          margin-bottom: 1.5rem; 
+        }
+        .content li { 
+          margin-bottom: 0.85rem; 
+          line-height: 1.7; 
+        }
+
+        /* Mobile */
         @media (max-width: 900px) {
-          .page-body { grid-template-columns: 1fr; gap: 2rem; }
-          .hero h1 { font-size: 2.4rem; }
+          .page-body { 
+            grid-template-columns: 1fr; 
+            gap: 1.5rem; 
+          }
+          .hero { padding: 4rem 1rem; }
+          .hero h1 { font-size: 2.2rem; }
+
+          .mobile-toggle { display: block; }
+
+          .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            padding: 1.5rem;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            overflow-y: auto;
+          }
+          .sidebar.open { left: 0; }
         }
       `}</style>
-    </>
+    </div>
   );
 }
