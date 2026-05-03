@@ -6,11 +6,11 @@ import { ArrowRight, Mail, MapPin, Send } from "lucide-react";
 
 export default function CTAFooter() {
   return (
-    <div className="w-full">
+    <div className="w-full py-0">
 
       {/* ================= CTA SECTION ================= */}
       <section id="contact-form"
-      className="relative bg-[#0c1220] overflow-hidden">
+      className="relative bg-[#0c1220] mt-0 overflow-hidden">
 
         {/* Subtle noise texture overlay */}
         <div
@@ -22,7 +22,7 @@ export default function CTAFooter() {
         />
 
         {/* Dim blue glow */}
-        <div className="absolute -top-32 -left-32 w-[600px] h-[600px] bg-blue-700/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute -top-32 -left-32 w-[600px] h-auto bg-blue-700/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="relative max-w-6xl mx-auto px-5 sm:px-8 md:px-12 pt-16 sm:pt-20 md:pt-24 pb-20 sm:pb-24 md:pb-28">
 

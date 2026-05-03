@@ -72,7 +72,7 @@ export default function About() {
   return (
     <>
       {/* ================= ABOUT HERO SECTION (Compact) ================= */}
-      <section id="about" className="relative bg-white pt-16 pb-16 lg:pb-20 overflow-hidden">
+      <section id="about" className="relative bg-white -mt-10 sm:-mt-14 md:-mt-20 pt-16 pb-16 lg:pb-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
@@ -127,9 +127,11 @@ export default function About() {
       </section>
 
       {/* ================= PRODUCT OFFERINGS ================= */}
-      <section id ="product-offerings"
-      className="bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <section
+  id="product-offerings"
+  className="bg-gray-50 -mt-10 sm:-mt-14 md:-mt-20 py-0 overflow-hidden"
+>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-0">
           <div className="text-center mb-8">
             <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900">Our Product Offerings</h2>
             <p className="text-gray-600 mt-2 text-sm sm:text-base">

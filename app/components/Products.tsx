@@ -38,8 +38,8 @@ const industries = [
 
 export default function IndustrySection() {
   return (
-    <section className="bg-[#0a0f1c] text-white py-14 sm:py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#0a0f1c] text-white -mt-10 sm:-mt-14 md:-mt-20 pt-6 sm:pt-10 md:pt-14 pb-12 sm:pb-16 md:pb-20">
+     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* HEADER */}
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-14 md:mb-20">
