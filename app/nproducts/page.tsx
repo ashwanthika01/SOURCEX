@@ -578,7 +578,7 @@ export default function ProductsPage() {
           </div>
           <motion.button
             whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-            onClick={() => router.push("/#inquiry-form")}
+            onClick={() => router.push("/ncontact")}
             className="shrink-0 flex items-center gap-2.5 bg-blue-600 hover:bg-blue-500
             text-white font-bold px-8 py-4 text-sm transition-colors whitespace-nowrap"
           >
